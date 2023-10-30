@@ -1,2 +1,2 @@
 # qmanca
-Quanto giorni mancano al Natale? Quanti al compleanno di mia mamma? Qmanca calcola i giorni mancanti o passati alla data selezionata.
+Quanti giorni mancano al Natale? Quanti giorni mancano al compleanno di mia mamma? Qmanca.app calcola i giorni trascorsi o mancanti alla data selezionata.
