@@ -1,0 +1,2 @@
+# qmanca
+Sviluppo Qmanca
