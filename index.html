@@ -81,20 +81,23 @@
             }
 
             var dataOggi = Date.now();
-            var differenza = Math.ceil((dataInserita - dataOggi) / (1000 * 60 * 60 * 24));
 
-            if (differenza === 0) {
+            //Calcola la differenza in giorni tra data inserita e data di oggi
+            var differenzaData = Math.ceil((dataInserita - dataOggi) / (1000 * 60 * 60 * 24));
+
+            //Riultato
+            if (differenzaData === 0) {
                 document.getElementById('risultato').textContent = 'È oggi!';
-            } else if (differenza === -1) {
+            } else if (differenzaData === -1) {
                 var ore = Math.abs(dataInserita - dataOggi) / (1000 * 60 * 60);
                 document.getElementById('risultato').textContent = 'È ieri!';
-            } else if (differenza < 0) {
-                document.getElementById('risultato').textContent = 'Sono passati ' + Math.abs(differenza) + ' giorni';
-            } else if (differenza === 1) {
+            } else if (differenzaData < 0) {
+                document.getElementById('risultato').textContent = 'Sono passati ' + Math.abs(differenzaData) + ' giorni';
+            } else if (differenzaData === 1) {
                 var ore = Math.abs(dataInserita - dataOggi) / (1000 * 60 * 60);
                 document.getElementById('risultato').textContent = 'È domani!';
             } else {
-                document.getElementById('risultato').textContent = 'Mancano ' + differenza + ' giorni';
+                document.getElementById('risultato').textContent = 'Mancano ' + differenzaData + ' giorni';
             }
 
             //Modifica la classe w3-hide in .w3-show
@@ -104,7 +107,6 @@
                 cambia.classList.add('w3-show');
             });
         };
-
     </script>
 
 </body>
