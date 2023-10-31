@@ -72,7 +72,7 @@
 
     <script>
         function calcolaDifferenza() {
-            var dataInserita = new Date(document.getElementById('data').value);
+            const dataInserita = new Date(document.getElementById('data').value);
 
             // Controllo se la data è valida (non NaN)
             if (isNaN(dataInserita)) {
@@ -80,21 +80,20 @@
                 return;
             }
 
-            var dataOggi = Date.now();
+            //const dataOggi = Date.now();
+            const dataOggi = new Date();
 
             //Calcola la differenza in giorni tra data inserita e data di oggi
-            var differenzaData = Math.ceil((dataInserita - dataOggi) / (1000 * 60 * 60 * 24));
+            let differenzaData = Math.floor((dataInserita - dataOggi) / (1000 * 60 * 60 * 24));
 
             //Riultato
             if (differenzaData === 0) {
                 document.getElementById('risultato').textContent = 'È oggi!';
             } else if (differenzaData === -1) {
-                var ore = Math.abs(dataInserita - dataOggi) / (1000 * 60 * 60);
                 document.getElementById('risultato').textContent = 'È ieri!';
             } else if (differenzaData < 0) {
                 document.getElementById('risultato').textContent = 'Sono passati ' + Math.abs(differenzaData) + ' giorni';
             } else if (differenzaData === 1) {
-                var ore = Math.abs(dataInserita - dataOggi) / (1000 * 60 * 60);
                 document.getElementById('risultato').textContent = 'È domani!';
             } else {
                 document.getElementById('risultato').textContent = 'Mancano ' + differenzaData + ' giorni';
@@ -106,6 +105,11 @@
                 cambia.classList.remove('w3-hide');
                 cambia.classList.add('w3-show');
             });
+
+            //Log
+            console.log(dataOggi);
+            console.log(dataInserita);
+            console.log(differenzaData);
         };
     </script>
 
