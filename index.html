@@ -59,7 +59,7 @@
                 <p class="">Seleziona un data per sapere quanti giorni mancano:</p>
 
                 <input type="date" id="data" required class="w3-round-medium w3-border-1 w3-border-black">
-                <button class="w3-button w3-round-medium w3-black" onclick="calcolaDifferenza()">Calcola</button>
+                <button class="w3-button w3-round-medium w3-black" onclick="calcolaGiorni(); mostraRisultati()">Calcola</button>
 
             </div>
         </section>
@@ -71,7 +71,7 @@
     </main>
 
     <script>
-        function calcolaDifferenza() {
+        function calcolaGiorni() {
 
             //Data di oggi
             const dataOggi = new Date();
@@ -105,18 +105,20 @@
                 document.getElementById('risultato').textContent = 'Mancano ' + differenzaData + ' giorni';
             }
 
-            //Modifica la classe w3-hide in .w3-show
-            let blocchi = document.querySelectorAll('.w3-hide');
-            blocchi.forEach(function (cambia) {
-                cambia.classList.remove('w3-hide');
-                cambia.classList.add('w3-show');
-            });
-
             //Log
             console.log(dataOggi);
             console.log(dataInserita);
             console.log(differenzaData);
         };
+
+        //Modifica la classe w3-hide in w3-show
+        function mostraRisultati(){
+            let blocchi = document.querySelectorAll(".w3-hide");
+            blocchi.forEach(function (cambia) {
+                cambia.classList.remove("w3-hide");
+                cambia.classList.add("w3-show","mg-animate");
+            });
+        }
     </script>
 
 </body>
