@@ -44,27 +44,63 @@
             padding: 5px;
         }
 
-        .shadow {
+        .mg-shadow {
             box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)
+        }
+
+
+        @keyframes tada {
+            0% {
+                transform: scale3d(1, 1, 1);
+            }
+
+            10%,
+            20% {
+                transform: scale3d(.9, .9, .9) rotate3d(0, 0, 1, -3deg);
+            }
+
+            30%,
+            50%,
+            70%,
+            90% {
+                transform: scale3d(1,1,1) rotate3d(0, 0, 1, 3deg);
+            }
+
+            40%,
+            60%,
+            80% {
+                transform: scale3d(1,1,1) rotate3d(0, 0, 1, -3deg);
+            }
+
+            100% {
+                transform: scale3d(1, 1, 1);
+            }
+        }
+
+        .mg-animate {
+            animation-name: tada;
+            animation-duration: 1s;
+            animation-iteration-count: 1;
         }
     </style>
 </head>
 
 <body>
     <main>
-        <section id="data_seleziona" class="w3-margin">
+        <section class="w3-margin">
             <div class="w3-container w3-padding-32 w3-round-xlarge w3-white shadow">
-                <img src="assets/hourglass.gif" alt="quanto manca">
+                <img src="assets/hourglass.gif" alt="quanto manca icona">
                 <h1 class="w3-sofia">Quanto manca?</h1>
                 <p class="">Seleziona un data per sapere quanti giorni mancano:</p>
 
                 <input type="date" id="data" required class="w3-round-medium w3-border-1 w3-border-black">
-                <button class="w3-button w3-round-medium w3-black" onclick="calcolaGiorni(); mostraRisultati()">Calcola</button>
+                <button class="w3-button w3-round-medium w3-black"
+                    onclick="calcolaGiorni(); mostraRisultati(); animazione()">Calcola</button>
 
             </div>
         </section>
-        <section id="data_risultato" class="w3-margin">
-            <div class="w3-container w3-padding-16 w3-round-xlarge w3-white w3-hide shadow">
+        <section class="w3-margin">
+            <div class="w3-container w3-padding-16 w3-round-xlarge w3-white w3-hide mg-shadow">
                 <h1 class="w3-sofia" id="risultato"></h1>
             </div>
         </section>
@@ -82,7 +118,7 @@
 
             //Controllo se la data è valida (non NaN)
             if (isNaN(dataInserita)) {
-                document.getElementById('risultato').textContent = 'Inserisci una data valida.';
+                document.getElementById('risultato').textContent = "Inserisci una data valida";
                 return;
             }
 
@@ -111,14 +147,29 @@
             console.log(differenzaData);
         };
 
-        //Modifica la classe w3-hide in w3-show
-        function mostraRisultati(){
-            let blocchi = document.querySelectorAll(".w3-hide");
-            blocchi.forEach(function (cambia) {
+        //Modifica tutte le classi w3-hide in w3-show
+        function mostraRisultati() {
+
+            let mostra = document.querySelectorAll(".w3-hide");
+            mostra.forEach(function (cambia) {
                 cambia.classList.remove("w3-hide");
-                cambia.classList.add("w3-show","mg-animate");
+                cambia.classList.add("w3-show");
+            });
+
+        }
+
+        //Animazione sui blocchi dei risultati con classe css mg-animate
+        function animazione() {
+            var elementi = document.querySelectorAll(".w3-show");
+            elementi.forEach(function (elemento) {
+                elemento.classList.add("mg-animate");
+
+                elemento.addEventListener("animationend", function () {
+                    elemento.classList.remove("mg-animate");
+                }, { once: true });
             });
         }
+
     </script>
 
 </body>
