@@ -58,7 +58,7 @@
                 <h1 class="w3-sofia">Quanto manca?</h1>
                 <p class="">Seleziona un data per sapere quanti giorni mancano:</p>
 
-                <input type="date" id="data" class="w3-round-medium w3-border-1 w3-border-black">
+                <input type="date" id="data" required class="w3-round-medium w3-border-1 w3-border-black">
                 <button class="w3-button w3-round-medium w3-black" onclick="calcolaDifferenza()">Calcola</button>
 
             </div>
@@ -72,29 +72,35 @@
 
     <script>
         function calcolaDifferenza() {
-            const dataInserita = new Date(document.getElementById('data').value);
 
-            // Controllo se la data è valida (non NaN)
+            //Data di oggi
+            const dataOggi = new Date();
+
+            // Data inserita -1 ora per correzione da input
+            const dataInserita = new Date(document.getElementById('data').value);
+            dataInserita.setHours(dataInserita.getHours() - 1);
+
+            //Controllo se la data è valida (non NaN)
             if (isNaN(dataInserita)) {
                 document.getElementById('risultato').textContent = 'Inserisci una data valida.';
                 return;
             }
 
-            //Data di oggi
-            const dataOggi = new Date();
+            //Millisecondi in un giorno
+            let msGiorno = 1000 * 60 * 60 * 24;
 
-            //Calcola la differenza in giorni tra data inserita e data di oggi
-            let differenzaData = Math.floor((dataInserita - dataOggi) / (1000 * 60 * 60 * 24));
+            //Calcola la differenza in giorni
+            let differenzaData = Math.ceil((dataInserita - dataOggi) / msGiorno);
 
-            //Riultato
+            //Risultato
             if (differenzaData === 0) {
                 document.getElementById('risultato').textContent = 'È oggi!';
             } else if (differenzaData === -1) {
                 document.getElementById('risultato').textContent = 'È ieri!';
-            } else if (differenzaData < 0) {
-                document.getElementById('risultato').textContent = 'Sono passati ' + Math.abs(differenzaData) + ' giorni';
             } else if (differenzaData === 1) {
                 document.getElementById('risultato').textContent = 'È domani!';
+            } else if (differenzaData < 0) {
+                document.getElementById('risultato').textContent = 'Sono passati ' + Math.abs(differenzaData) + ' giorni';
             } else {
                 document.getElementById('risultato').textContent = 'Mancano ' + differenzaData + ' giorni';
             }
