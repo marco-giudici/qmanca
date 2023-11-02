@@ -56,20 +56,20 @@
 
             10%,
             20% {
-                transform: scale3d(.9, .9, .9) rotate3d(0, 0, 1, -3deg);
+                transform: scale3d(.9, .9, .9) rotate3d(0, 0, 1, -2deg);
             }
 
             30%,
             50%,
             70%,
             90% {
-                transform: scale3d(1,1,1) rotate3d(0, 0, 1, 3deg);
+                transform: scale3d(1,1,1) rotate3d(0, 0, 1, 2deg);
             }
 
             40%,
             60%,
             80% {
-                transform: scale3d(1,1,1) rotate3d(0, 0, 1, -3deg);
+                transform: scale3d(1,1,1) rotate3d(0, 0, 1, -2deg);
             }
 
             100% {
@@ -91,7 +91,7 @@
             <div class="w3-container w3-padding-32 w3-round-xlarge w3-white shadow">
                 <img src="assets/hourglass.gif" alt="quanto manca icona">
                 <h1 class="w3-sofia">Quanto manca?</h1>
-                <p class="">Seleziona un data per sapere quanti giorni mancano:</p>
+                <p>Seleziona un data per sapere quanti giorni mancano:</p>
 
                 <input type="date" id="data" required class="w3-round-medium w3-border-1 w3-border-black">
                 <button class="w3-button w3-round-medium w3-black"
@@ -112,7 +112,7 @@
             //Data di oggi
             const dataOggi = new Date();
 
-            // Data inserita -1 ora per correzione da input
+            // Data inserita -1 ora per correzione new Date da input date
             const dataInserita = new Date(document.getElementById('data').value);
             dataInserita.setHours(dataInserita.getHours() - 1);
 
