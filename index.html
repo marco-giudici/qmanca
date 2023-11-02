@@ -126,25 +126,25 @@
             let msGiorno = 1000 * 60 * 60 * 24;
 
             //Calcola la differenza in giorni
-            let differenzaData = Math.ceil((dataInserita - dataOggi) / msGiorno);
+            let differenzaGiorni = Math.ceil((dataInserita - dataOggi) / msGiorno);
 
             //Risultato
-            if (differenzaData === 0) {
+            if (differenzaGiorni === 0) {
                 document.getElementById('risultato').textContent = 'È oggi!';
-            } else if (differenzaData === -1) {
+            } else if (differenzaGiorni === -1) {
                 document.getElementById('risultato').textContent = 'È ieri!';
-            } else if (differenzaData === 1) {
+            } else if (differenzaGiorni === 1) {
                 document.getElementById('risultato').textContent = 'È domani!';
-            } else if (differenzaData < 0) {
-                document.getElementById('risultato').textContent = 'Sono passati ' + Math.abs(differenzaData) + ' giorni';
+            } else if (differenzaGiorni < 0) {
+                document.getElementById('risultato').textContent = 'Sono passati ' + Math.abs(differenzaGiorni) + ' giorni';
             } else {
-                document.getElementById('risultato').textContent = 'Mancano ' + differenzaData + ' giorni';
+                document.getElementById('risultato').textContent = 'Mancano ' + differenzaGiorni + ' giorni';
             }
 
             //Log
             console.log(dataOggi);
             console.log(dataInserita);
-            console.log(differenzaData);
+            console.log(differenzaGiorni);
         };
 
         //Modifica tutte le classi w3-hide in w3-show
