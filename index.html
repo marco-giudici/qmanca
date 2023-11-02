@@ -40,8 +40,16 @@
             width: 480px;
         }
 
-        #data {
-            padding: 5px;
+        input {
+            padding: 5px 10px;
+        }
+
+        button{
+            vertical-align: unset !important;
+        }
+        input, button{
+            font-size: large;
+            height: 45px;
         }
 
         .mg-shadow {
@@ -63,13 +71,13 @@
             50%,
             70%,
             90% {
-                transform: scale3d(1,1,1) rotate3d(0, 0, 1, 1deg);
+                transform: scale3d(1, 1, 1) rotate3d(0, 0, 1, 1deg);
             }
 
             40%,
             60%,
             80% {
-                transform: scale3d(1,1,1) rotate3d(0, 0, 1, -1deg);
+                transform: scale3d(1, 1, 1) rotate3d(0, 0, 1, -1deg);
             }
 
             100% {
@@ -93,8 +101,8 @@
                 <h1 class="w3-sofia">Quanto manca?</h1>
                 <p>Seleziona un data per sapere quanti giorni mancano:</p>
 
-                <input type="date" id="data" required class="w3-round-medium w3-border-1 w3-border-black">
-                <button class="w3-button w3-round-medium w3-black"
+                <input type="date" id="data" class="w3-round-medium w3-border-1 w3-border-black">
+                <button id="calcola" class="w3-button w3-round-medium w3-black"
                     onclick="calcolaGiorni(); mostraRisultati(); animazione()">Calcola</button>
 
             </div>
