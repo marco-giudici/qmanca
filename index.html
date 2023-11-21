@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <title>Quanto Manca?</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta title="Quanto manca? Qmanca.app calcola quanti giorni mancano">
+    <meta title="Quanto manca? Qmanca calcola quanti giorni mancano">
     <meta name="description" content="Quanti giorni mancano al Natale? Quanti giorni mancano al compleanno di mamma? Qmanca.app calcola i giorni trascorsi o mancanti alla data selezionata.
     ">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -57,7 +57,7 @@
             box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)
         }
 
-
+        /* animazione css */
         @keyframes tada {
             0% {
                 transform: scale3d(1, 1, 1);
@@ -98,46 +98,55 @@
     <main>
         <section class="w3-margin">
             <div class="w3-container w3-padding-32 w3-round-xlarge w3-white shadow">
-                <a href="index.html"><img src="assets/hourglass.gif" alt="quanto manca icona"></a>
+                <a href="index.html" title="inserisci una nuova data"><img src="assets/hourglass.gif" alt="quanto manca icona"></a>
                 <h1 class="w3-sofia">Quanto manca?</h1>
                 <p>Seleziona un data per sapere quanti giorni mancano:</p>
-
                 <input type="date" id="data" class="w3-round-medium w3-border w3-border-black">
                 <button id="calcola" class="w3-button w3-round-medium w3-black w3-border w3-border-black"
-                    onclick="calcolaGiorni(); mostraRisultati(); animazione()">Calcola</button>
-
+                    onclick="calcolaGiorni(); animazione()">Calcola</button>
             </div>
         </section>
-        <section class="w3-margin">
-            <div class="w3-container w3-padding-16 w3-round-xlarge w3-white w3-hide mg-shadow">
+        <section class="w3-margin mg-blocco w3-hide" id="blocco1">
+            <div class="w3-container w3-padding-16 w3-round-xlarge w3-white mg-shadow">
                 <h1 class="w3-sofia" id="risultato"></h1>
             </div>
+        </section>
+        <section class="w3-margin mg-blocco w3-hide" id="blocco2">
+            <p>ovvero</p>
+            <div class="w3-container w3-padding-16 w3-round-xlarge w3-white mg-shadow">
+                <h2 class="w3-sofia" id="risultato2"></h2>
+            </div>
+            <p>approssimando un mese a 30 giorni e un anno a 365 giorni.</p>
         </section>
     </main>
 
     <script>
         function calcolaGiorni() {
 
-            //Data di oggi
+            //data di oggi
             const dataOggi = new Date();
 
-            // Data inserita -1 ora per correzione formato data passato da input
+            //data inserita -1 ora per correzione al formato data passato da input
             const dataInserita = new Date(document.getElementById('data').value);
             dataInserita.setHours(dataInserita.getHours() - 1);
 
-            //Controllo se la data è valida (non NaN)
+            //mostro blocco1
+            document.getElementById('blocco1').classList.remove("w3-hide");
+            document.getElementById('blocco1').classList.add("w3-show");
+
+            //controllo se la data è valida (non NaN)
             if (isNaN(dataInserita)) {
                 document.getElementById('risultato').textContent = "Inserisci una data valida";
                 return;
             }
 
-            //Millisecondi in un giorno
+            //millisecondi in un giorno
             let msGiorno = 1000 * 60 * 60 * 24;
 
-            //Calcola la differenza in giorni
+            //calcola la differenza in giorni
             let differenzaGiorni = Math.ceil((dataInserita - dataOggi) / msGiorno);
 
-            //Risultato
+            //risultato in giorni
             if (differenzaGiorni === 0) {
                 document.getElementById('risultato').textContent = 'È oggi!';
             } else if (differenzaGiorni === -1) {
@@ -150,26 +159,44 @@
                 document.getElementById('risultato').textContent = 'Mancano ' + differenzaGiorni + ' giorni';
             }
 
+            if (differenzaGiorni <= -7 || differenzaGiorni >= 7) {
+                //mostro blocco2
+                document.getElementById('blocco2').classList.remove("w3-hide");
+                document.getElementById('blocco2').classList.add("w3-show");
+
+                //differnza per calcolo anni, mesi, settimane, giorni
+                let differenzaGiorniOppure = Math.abs(differenzaGiorni);
+
+                //calcolo approssimato in anni, mesi, settimane, giorni
+                let anni = Math.floor(differenzaGiorniOppure / 365);
+                let mesi = Math.floor((differenzaGiorniOppure % 365) / 30);
+                let settimane = Math.floor(((differenzaGiorniOppure % 365) % 30) / 7);
+                let giorniRimasti = Math.floor(((differenzaGiorniOppure % 365) % 30) % 7);
+
+                //risultato approssimato in anni, mesi, settimane, giorni
+                if (anni != 0) {
+                    document.getElementById("risultato2").innerHTML = anni + " anni<br/>" + mesi + " mesi</br>" + settimane + " settimane</br>" + giorniRimasti + " giorni</br>";
+                } else if (mesi != 0) {
+                    document.getElementById("risultato2").innerHTML = mesi + " mesi</br>" + settimane + " settimane</br>" + giorniRimasti + " giorni";
+                } else if (settimane != 0) {
+                    document.getElementById("risultato2").innerHTML = settimane + " settimane<br/>" + giorniRimasti + " giorni";
+                }
+            } else {
+
+                //nascondi blocco 2
+                document.getElementById('blocco2').classList.add("w3-hide");
+                document.getElementById('blocco2').classList.remove("w3-show");
+            }
+
             //Log
             console.log(dataOggi);
             console.log(dataInserita);
             console.log(differenzaGiorni);
         };
 
-        //Modifica tutte le classi w3-hide in w3-show
-        function mostraRisultati() {
-
-            let mostra = document.querySelectorAll(".w3-hide");
-            mostra.forEach(function (cambia) {
-                cambia.classList.remove("w3-hide");
-                cambia.classList.add("w3-show");
-            });
-
-        }
-
-        //Animazione sui blocchi dei risultati con classe css mg-animate
+        //animazione sui blocchi dei risultati con classe css mg-animate
         function animazione() {
-            var elementi = document.querySelectorAll(".w3-show");
+            var elementi = document.querySelectorAll(".mg-blocco");
             elementi.forEach(function (elemento) {
                 elemento.classList.add("mg-animate");
 
