@@ -106,12 +106,12 @@
                     onclick="calcolaGiorni(); animazione()">Calcola</button>
             </div>
         </section>
-        <section class="w3-margin mg-blocco w3-hide" id="blocco1">
+        <section class="w3-margin w3-hide" id="blocco1">
             <div class="w3-container w3-padding-16 w3-round-xlarge w3-white mg-shadow">
                 <h1 class="w3-sofia" id="risultato"></h1>
             </div>
         </section>
-        <section class="w3-margin mg-blocco w3-hide" id="blocco2">
+        <section class="w3-margin w3-hide" id="blocco2">
             <p>ovvero</p>
             <div class="w3-container w3-padding-16 w3-round-xlarge w3-white mg-shadow">
                 <h2 class="w3-sofia" id="risultato2"></h2>
@@ -188,15 +188,15 @@
                 document.getElementById('blocco2').classList.remove("w3-show");
             }
 
-            //Log
+            //log console
             console.log(dataOggi);
             console.log(dataInserita);
             console.log(differenzaGiorni);
         };
 
-        //animazione sui blocchi dei risultati con classe css mg-animate
+        //animazione sui blocchi dei risultati con classe css mg-shadow
         function animazione() {
-            var elementi = document.querySelectorAll(".mg-blocco");
+            var elementi = document.querySelectorAll(".mg-shadow");
             elementi.forEach(function (elemento) {
                 elemento.classList.add("mg-animate");
 
