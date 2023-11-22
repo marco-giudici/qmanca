@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="it" onkeydown="tastiera(event)">
 
 <head>
     <meta charset="UTF-8">
@@ -97,7 +97,7 @@
 <body>
     <main>
         <section class="w3-margin" id="inserisci">
-            <div class="w3-container w3-padding-32 w3-round-xlarge w3-white shadow">
+            <div class="w3-container w3-padding-32 w3-round-xlarge w3-white mg-shadow">
                 <a href="index.html" title="inserisci una nuova data"><img src="assets/hourglass.gif"
                         alt="quanto manca icona"></a>
                 <h1 class="w3-sofia">Quanto manca?</h1>
@@ -108,13 +108,13 @@
             </div>
         </section>
         <section class="w3-margin w3-hide" id="blocco1">
-            <div class="w3-container w3-padding-16 w3-round-xlarge w3-white mg-shadow">
-                <h1 class="w3-sofia" id="risultato"></h1>
+            <div class="w3-container w3-padding-16 w3-round-xlarge w3-white mg-shadow mg-risultato">
+                <h1 class="w3-sofia" id="risultato1"></h1>
             </div>
         </section>
         <section class="w3-margin w3-hide" id="blocco2">
             <p>ovvero</p>
-            <div class="w3-container w3-padding-16 w3-round-xlarge w3-white mg-shadow">
+            <div class="w3-container w3-padding-16 w3-round-xlarge w3-white mg-shadow mg-risultato">
                 <h2 class="w3-sofia" id="risultato2"></h2>
             </div>
             <p>approssimando un mese a 30 giorni e un anno a 365 giorni.</p>
@@ -124,7 +124,7 @@
     <script>
 
         //funzione invio da tastiera
-        document.getElementById("inserisci").onkeydown = function tastoInvio(event) {
+        function tastiera(event) {
             if (event.key == "Enter") {
                 document.getElementById("calcola").click();
             }
@@ -139,13 +139,13 @@
             const dataInserita = new Date(document.getElementById('data').value);
             dataInserita.setHours(dataInserita.getHours() - 1);
 
-            //mostro blocco1
+            //mostro risultato1
             document.getElementById('blocco1').classList.remove("w3-hide");
             document.getElementById('blocco1').classList.add("w3-show");
 
             //controllo se la data è valida (non NaN)
             if (isNaN(dataInserita)) {
-                document.getElementById('risultato').textContent = "Inserisci una data valida";
+                document.getElementById('risultato1').textContent = "Inserisci una data valida";
                 return;
             }
 
@@ -157,19 +157,19 @@
 
             //risultato in giorni
             if (differenzaGiorni === 0) {
-                document.getElementById('risultato').textContent = 'È oggi!';
+                document.getElementById('risultato1').textContent = 'È oggi!';
             } else if (differenzaGiorni === -1) {
-                document.getElementById('risultato').textContent = 'È ieri!';
+                document.getElementById('risultato1').textContent = 'È ieri!';
             } else if (differenzaGiorni === 1) {
-                document.getElementById('risultato').textContent = 'È domani!';
+                document.getElementById('risultato1').textContent = 'È domani!';
             } else if (differenzaGiorni < 0) {
-                document.getElementById('risultato').textContent = 'Sono passati ' + Math.abs(differenzaGiorni) + ' giorni';
+                document.getElementById('risultato1').textContent = 'Sono passati ' + Math.abs(differenzaGiorni) + ' giorni';
             } else {
-                document.getElementById('risultato').textContent = 'Mancano ' + differenzaGiorni + ' giorni';
+                document.getElementById('risultato1').textContent = 'Mancano ' + differenzaGiorni + ' giorni';
             }
 
             if (differenzaGiorni <= -7 || differenzaGiorni >= 7) {
-                //mostro blocco2
+                //mostro blocco 2
                 document.getElementById('blocco2').classList.remove("w3-hide");
                 document.getElementById('blocco2').classList.add("w3-show");
 
@@ -203,12 +203,13 @@
             console.log(differenzaGiorni);
         };
 
-        //animazione sui blocchi dei risultati con classe css mg-shadow
+        //animazione sui blocchi con classe css mg-shadow
         function animazione() {
             var elementi = document.querySelectorAll(".mg-shadow");
             elementi.forEach(function (elemento) {
                 elemento.classList.add("mg-animate");
 
+                //rimuove la classe mg-animate al termine dell'animazione
                 elemento.addEventListener("animationend", function () {
                     elemento.classList.remove("mg-animate");
                 }, { once: true });
