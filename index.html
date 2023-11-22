@@ -96,9 +96,10 @@
 
 <body>
     <main>
-        <section class="w3-margin">
+        <section class="w3-margin" id="inserisci">
             <div class="w3-container w3-padding-32 w3-round-xlarge w3-white shadow">
-                <a href="index.html" title="inserisci una nuova data"><img src="assets/hourglass.gif" alt="quanto manca icona"></a>
+                <a href="index.html" title="inserisci una nuova data"><img src="assets/hourglass.gif"
+                        alt="quanto manca icona"></a>
                 <h1 class="w3-sofia">Quanto manca?</h1>
                 <p>Seleziona un data per sapere quanti giorni mancano:</p>
                 <input type="date" id="data" class="w3-round-medium w3-border w3-border-black">
@@ -121,6 +122,14 @@
     </main>
 
     <script>
+
+        //funzione invio da tastiera
+        document.getElementById("inserisci").onkeydown = function tastoInvio(event) {
+            if (event.key == "Enter") {
+                document.getElementById("calcola").click();
+            }
+        }
+
         function calcolaGiorni() {
 
             //data di oggi
