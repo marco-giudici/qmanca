@@ -130,6 +130,34 @@
             }
         }
 
+        //mostra nascondi elementi
+        function mostra(stato, id) {
+
+            let elemento = document.getElementById(id);
+
+            if (stato == 0) {
+                elemento.classList.remove("w3-show");
+                elemento.classList.add("w3-hide");
+            } else if (stato == 1) {
+                elemento.classList.remove("w3-hide");
+                elemento.classList.add("w3-show")
+            };
+        }
+
+        //animazione sui blocchi con classe css mg-shadow
+        function animazione() {
+            var elementi = document.querySelectorAll(".mg-shadow");
+            elementi.forEach(function (elemento) {
+                elemento.classList.add("mg-animate");
+
+                //rimuove la classe mg-animate al termine dell'animazione
+                elemento.addEventListener("animationend", function () {
+                    elemento.classList.remove("mg-animate");
+                }, { once: true });
+            });
+        }
+
+        //calcola giorni
         function calcolaGiorni() {
 
             //data di oggi
@@ -139,9 +167,8 @@
             const dataInserita = new Date(document.getElementById('data').value);
             dataInserita.setHours(dataInserita.getHours() - 1);
 
-            //mostro risultato1
-            document.getElementById('blocco1').classList.remove("w3-hide");
-            document.getElementById('blocco1').classList.add("w3-show");
+            //mostra blocco risultato1
+            mostra(1, 'blocco1');
 
             //controllo se la data è valida (non NaN)
             if (isNaN(dataInserita)) {
@@ -169,9 +196,9 @@
             }
 
             if (differenzaGiorni <= -7 || differenzaGiorni >= 7) {
-                //mostro blocco 2
-                document.getElementById('blocco2').classList.remove("w3-hide");
-                document.getElementById('blocco2').classList.add("w3-show");
+
+                //mostra blocco risultato2
+                mostra(1, 'blocco2');
 
                 //differnza per calcolo anni, mesi, settimane, giorni
                 let differenzaGiorniOppure = Math.abs(differenzaGiorni);
@@ -192,9 +219,8 @@
                 }
             } else {
 
-                //nascondi blocco 2
-                document.getElementById('blocco2').classList.add("w3-hide");
-                document.getElementById('blocco2').classList.remove("w3-show");
+                //nascondi blocco risultato2
+                mostra(0, 'blocco2');
             }
 
             //log console
@@ -202,19 +228,6 @@
             console.log(dataInserita);
             console.log(differenzaGiorni);
         };
-
-        //animazione sui blocchi con classe css mg-shadow
-        function animazione() {
-            var elementi = document.querySelectorAll(".mg-shadow");
-            elementi.forEach(function (elemento) {
-                elemento.classList.add("mg-animate");
-
-                //rimuove la classe mg-animate al termine dell'animazione
-                elemento.addEventListener("animationend", function () {
-                    elemento.classList.remove("mg-animate");
-                }, { once: true });
-            });
-        }
 
     </script>
 
