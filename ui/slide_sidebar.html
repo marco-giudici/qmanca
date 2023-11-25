@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background-color: #ffc107;
+            font-size: 16px;
+        }
+
+        a {
+            color: #000;
+            text-decoration: none;
+        }
+
+        #sidebar-container {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            top: 0;
+            right: 0;
+            z-index: 1;
+            background-color: #00bcd4;
+            overflow-x: hidden;
+            /* Disable horizontal scroll */
+            transition: 0.1s ease-in-out;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+        }
+
+        #sidebar-container>div,
+        #main-container>div {
+            margin: 25px;
+            padding: 20px;
+            width: 460px;
+            border-radius: 20px;
+            background-color: #FFF;
+            box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)
+        }
+
+        .btn {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            padding: 15px;
+        }
+        .btn:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: #000;
+            opacity: 0;
+            transition: opacity 300ms;
+            border-radius: 50%;
+        }
+
+        .btn:hover:before {
+            opacity: 0.1;
+        }
+
+        #main-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="sidebar-container">
+        <a href="javascript:void(0)" onclick="closeNav()"><span
+                class="material-symbols-outlined btn">close</span></a>
+        <div>
+            <h1>Sidebar open!</h1>
+            <p>Ciao questa è la sidebar aperta! Qmanca è un'applicazione molto utile che ti permette di calcolare quanti
+                giorni mancano ad una data. Ecco come funziona: ...</p>
+        </div>
+    </div>
+    <div id="main-container">
+        <a href="javascript:void(0)" onclick="openNav()"><span
+                class="material-symbols-outlined btn">info</span></a>
+        <div>
+            <h1>Slide Sidebar</h1>
+            <p>clica sull'icona i per aprire la sidebar...</p>
+        </div>
+    </div>
+    <script>
+
+        function openNav() {
+            document.getElementById("sidebar-container").style.width = "98%";
+        }
+        function closeNav() {
+            document.getElementById("sidebar-container").style.width = "0";
+        }
+    </script>
+</body>
+
+</html>
