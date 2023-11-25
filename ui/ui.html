@@ -18,6 +18,7 @@
             margin: 0;
             padding: 0;
             background-color: #ffc107;
+            font-size: 16px;
         }
 
         main {
@@ -30,10 +31,12 @@
         }
 
         section {
-            margin: 10px;
+            margin: 25px;
             padding: 20px;
-            min-width: 300px;
+            width: 460px;
+            border-radius: 20px;
             background-color: #FFF;
+            box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)
         }
 
         #menu {
@@ -45,17 +48,15 @@
             min-width: 70px;
         }
 
-        #menu>div {
+        /*#menu>div {
             margin: 5px;
-        }
-        #menu>div a{
-            color: #000;
-        }
+        }*/
 
         .icon-button {
             position: relative;
-            padding: 10px;
-            /*-webkit-tap-highlight-color: rgba(0,0,0,0);*/
+            margin: 5px;
+            padding: 15px;
+            /*-webkit-tap-highlight-color: red;*/
         }
 
         .icon-button:before {
@@ -100,13 +101,19 @@
 
 <body>
     <main>
-        <section>blocco 1</section>
-        <section>blocco 2</section>
+        <section>
+            <h1>Blocco 1</h1>
+            <p>questo è il contenuto</p>
+        </section>
+        <section>
+            <h1>Blocco 2</h1>
+            <p>questo è il contenuto</p>
+        </section>
     </main>
     <div id="menu">
-        <div><a href="#"><span class="material-symbols-outlined icon-button">info</span></a></div>
-        <div><a href="#"><span class="material-symbols-outlined icon-button">dark_mode</span></a></div>
-        <div><a href="#"><span class="material-symbols-outlined icon-button">palette</span></a></div>
+        <div><span class="material-symbols-outlined icon-button">info</span></div>
+        <div><span class="material-symbols-outlined icon-button">dark_mode</span></div>
+        <div><span class="material-symbols-outlined icon-button">palette</span></div>
     </div>
 </body>
 
