@@ -179,16 +179,20 @@
             index = (index + 1) % colors.length;
         }
 
-        // cambia colore con il tasto  sapzio
+        //funzioni da tastiera
         document.addEventListener("keydown", function (event) {
+            //cambia colore sfondo
             if (event.key == " ") {
                 changeBg();
             }
+            //mostra nascondi sidebar
             if (event.key == "i") {
-                openNav();
-            }
-            if (event.key == "x") {
-                closeNav();
+                let width = document.getElementById("sidebar-container").offsetWidth;
+                if (width == 0) {
+                    openNav();
+                } else {
+                    closeNav();
+                }
             }
         });
     </script>
