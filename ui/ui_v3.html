@@ -13,6 +13,10 @@
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             margin: 0;
             padding: 0;
@@ -63,13 +67,6 @@
             min-height: 70px;
             min-width: 70px;
             padding: 5px;
-        }
-
-        #sidebar-menu a.icon,
-        #app-menu a.icon {
-            display: inline-block;
-            width: auto;
-            height: auto;
         }
 
         #app-container {
@@ -149,8 +146,9 @@
 <body>
     <div id="sidebar-container">
         <div id="sidebar-main">
-            <h1>Sidebar open!</h1>
-            <p>Ciao questa è la sidebar aperta! Qmanca è un'applicazione molto utile che ti permette di calcolare quanti
+            <h1>Sidebar Open!</h1>
+            <p>Ciao questa è la sidebar aperta!</p>
+            <p>Qmanca è un'applicazione molto utile che ti permette di calcolare quanti
                 giorni mancano ad una data. Ecco come funziona: ...</p>
         </div>
         <div id="sidebar-menu"><a href="javascript:void(0)" onclick="closeNav()"><span
@@ -160,20 +158,26 @@
         <div id="app-main">
             <div class="app-container-block">
                 <h1>Blocco 1</h1>
-                <p>questo è il contenuto</p>
+                <p>Qmanca è un'applicazione molto utile che ti permette di calcolare quanti
+                    giorni mancano ad una data. Ecco come funziona: ...</p>
             </div>
             <div class="app-container-block">
                 <h1>Blocco 2</h1>
-                <p>questo è il contenuto</p>
+                <p>Qmanca è un'applicazione molto utile che ti permette di calcolare quanti
+                    giorni mancano ad una data. Ecco come funziona: ...</p>
+            </div>
+            <div class="app-container-block">
+                <h1>Blocco 3</h1>
+                <p>Qmanca è un'applicazione molto utile che ti permette di calcolare quanti
+                    giorni mancano ad una data. Ecco come funziona: ...</p>
             </div>
         </div>
         <div id="app-menu">
-            <div><a href="javascript:void(0)" class="icon" onclick="openNav()"><span
+            <div><a href="javascript:void(0)" onclick="openNav()"><span
                         class="material-symbols-outlined icon-button">info</span></a></div>
-            <div><a href="javascript:void(0)" class="icon"><span
-                        class="material-symbols-outlined icon-button">dark_mode</span></a>
+            <div><a href="javascript:void(0)"><span class="material-symbols-outlined icon-button">dark_mode</span></a>
             </div>
-            <div><a href="javascript:void(0)" class="icon" onclick="changeBg()"><span
+            <div><a href="javascript:void(0)" onclick="changeBg()"><span
                         class="material-symbols-outlined icon-button">palette</span></a></div>
         </div>
     </div>
