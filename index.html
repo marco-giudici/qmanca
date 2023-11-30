@@ -1,20 +1,19 @@
 <!DOCTYPE html>
-<html lang="it" onkeydown="tastiera(event)">
+<html>
 
 <head>
-    <meta charset="UTF-8">
-    <title>Quanto Manca?</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta title="Quanto manca? Qmanca calcola quanti giorni mancano">
-    <meta name="description" content="Quanti giorni mancano al Natale? Quanti giorni mancano al compleanno di mamma? Qmanca.app calcola i giorni trascorsi o mancanti alla data selezionata.
-    ">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
-    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sofia&display=swap" rel="stylesheet">
+    <!-- Google Icons -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 
     <style>
-        .w3-sofia {
-            font-family: Sofia, cursive;
+        * {
+            box-sizing: border-box;
         }
 
         html {
@@ -22,39 +21,176 @@
         }
 
         body {
-            display: flex;
-            align-items: start;
-            justify-content: center;
             margin: 0;
+            padding: 0;
             background-color: #ffc107;
             font-family: Arial, Helvetica, sans-serif;
-            text-align: center;
+            font-size: 16px;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            margin: 0.4em 0;
+            font-weight: 400;
+        }
+
+        p {
+            margin: 0.5em;
         }
 
         a {
-            text-decoration: underline;
-        }
-
-        main {
-            width: 440px;
-            box-sizing: border-box;
-        }
-
-        input {
-            padding: 5px 10px;
             color: #000;
+            text-decoration: none;
+            -webkit-tap-highlight-color: transparent;
         }
 
         input,
         button {
             margin: 5px;
+            padding: 5px 10px;
             height: 45px;
             font-size: large;
             vertical-align: middle;
+            border-radius: 5px;
+            border: 1px solid #000;
         }
 
-        .mg-shadow {
-            box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)
+        input {
+            color: #000;
+        }
+
+        button {
+            background-color: #000;
+            color: #FFF;
+            cursor: pointer
+        }
+
+        .mg-sofia {
+            font-family: 'Sofia', cursive;
+        }
+
+        #sidebar-container {
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-end;
+            align-items: flex-start;
+            position: fixed;
+            top: 0;
+            right: 0;
+            z-index: 1;
+            height: 100%;
+            width: 0;
+            max-width: 600px;
+            overflow-x: hidden;
+            background-color: #FFF;
+            transition: 0.1s ease-in-out;
+            border-radius: 20px 0 0 20px;
+            box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+        }
+
+        #sidebar-main {
+            padding: 20px;
+            width: 100%;
+            height: 100%;
+        }
+
+        #sidebar-menu,
+        #app-menu {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            min-height: 70px;
+            min-width: 70px;
+            padding: 5px;
+        }
+
+        #app-container {
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+            justify-content: flex-end;
+        }
+
+        #app-main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-left: 70px;
+            padding: 0;
+            width: 100%;
+        }
+
+        .app-container-section {
+            margin: 10px;
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .app-container-block {
+            padding: 20px;
+            border-radius: 20px;
+            background-color: #FFF;
+            box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+            text-align: center;
+        }
+
+        .icon-button {
+            position: relative;
+            padding: 15px;
+            font-size: 28px;
+        }
+
+        .icon-button:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: #000;
+            opacity: 0;
+            transition: opacity 300ms;
+            border-radius: 50%;
+        }
+
+        .icon-button:hover:before {
+            opacity: 0.1;
+        }
+
+        @media only screen and (max-width: 768px) {
+
+            #app-container,
+            #sidebar-container {
+                flex-direction: column;
+                align-items: flex-end;
+            }
+
+            #app-container {
+                margin: 10px;
+            }
+
+            #app-main {
+                margin-left: 0;
+                margin-bottom: 70px;
+            }
+
+            #app-menu {
+                position: fixed;
+                bottom: 0;
+                right: 0;
+                flex-direction: row-reverse;
+                justify-content: flex-start;
+                width: 100%;
+                background-color: #FFFFFF50;
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
+            }
         }
 
         /* animazione css */
@@ -86,103 +222,165 @@
             }
         }
 
-        .mg-animate {
+        .mg-tada {
             animation-name: tada;
             animation-duration: 1s;
             animation-iteration-count: 1;
         }
+
+        .mg-show {
+            display: block;
+        }
+
+        .mg-hide {
+            display: none;
+        }
     </style>
+
 </head>
 
 <body>
-    <main>
-        <section class="w3-margin" id="inserisci">
-            <div class="w3-container w3-padding-32 w3-round-xlarge w3-white mg-shadow">
-                <a href="index.html" title="inserisci una nuova data"><img src="assets/hourglass.gif"
-                        alt="quanto manca icona"></a>
-                <h1 class="w3-sofia">Quanto manca?</h1>
-                <p>Seleziona un data per sapere quanti giorni mancano:</p>
-                <input type="date" id="data" class="w3-round-medium w3-border w3-border-black">
-                <button id="calcola" class="w3-button w3-round-medium w3-black w3-border w3-border-black"
-                    onclick="calcolaGiorni(); animazione()">Calcola</button>
-            </div>
-        </section>
-        <section class="w3-margin w3-hide" id="blocco1">
-            <div class="w3-container w3-padding-16 w3-round-xlarge w3-white mg-shadow mg-risultato">
-                <h1 class="w3-sofia" id="risultato1"></h1>
-            </div>
-        </section>
-        <section class="w3-margin w3-hide" id="blocco2">
-            <p>che sono</p>
-            <div class="w3-container w3-padding-16 w3-round-xlarge w3-white mg-shadow mg-risultato">
-                <h2 class="w3-sofia" id="risultato2"></h2>
-            </div>
-            <p>approssimando un mese a 30 giorni e un anno a 365 giorni.</p>
-        </section>
-    </main>
+    <div id="sidebar-container">
+        <div id="sidebar-main">
+            <h1 class="mg-sofia">Quanto manca?</h1>
+            <p>Qmanca è un'applicazione semplice ma molto utile che ti permette di calcolare quanti
+                giorni mancano ad una certa data.</p>
+            <p>Scrivi o seleziona la data desiderata e clicca "calcola", fatto!</p>
+            <p>Il risultato viene indicato in giorni e per comodità, viene indicato anche a quanti anni, mesi, settimane
+                corrispondo, approssimando un mese con 30 giorni e un anno con 365 giorni.</p>
+            <p>Ad esempio: quanto manca a Natale?</p>
 
+        </div>
+        <div id="sidebar-menu"><a href="javascript:void(0)" onclick="closeNav()"><span
+                    class="material-symbols-outlined icon-button">close</span></a></div>
+    </div>
+    <div id="app-container">
+        <div id="app-main">
+            <div class="app-container-section">
+                <div class="app-container-block" id="inserisci">
+                    <a href="index.html" title="inserisci una nuova data"><img src="assets/hourglass.gif"
+                            alt="quanto manca icona"></a>
+                    <h1 class="mg-sofia">Quanto manca?</h1>
+                    <p>Seleziona un data per sapere quanti giorni mancano:</p>
+                    <input type="date" id="data" class="w3-round-medium w3-border w3-border-black">
+                    <button id="calcola" class="w3-button w3-round-medium w3-black w3-border w3-border-black"
+                        onclick="calcolaGiorni(); animazione()">Calcola</button>
+                </div>
+            </div>
+            <div class="app-container-section mg-hide" id="blocco1">
+                <div class="app-container-block mg-animate">
+                    <h1 class="mg-sofia" id="risultato1"></h1>
+                </div>
+            </div>
+            <div class="app-container-section mg-hide" id="blocco2">
+                <p>oppure</p>
+                <div class="app-container-block mg-animate">
+                    <h2 class="mg-sofia" id="risultato2"></h2>
+                </div>
+                <p>approssimando un mese con 30 giorni e un anno con 365 giorni.</p>
+            </div>
+        </div>
+        <div id="app-menu">
+            <div><a href="javascript:void(0)" onclick="openNav()"><span
+                        class="material-symbols-outlined icon-button">info</span></a></div>
+            <div><a href="javascript:void(0)" onclick="changeBg()"><span
+                        class="material-symbols-outlined icon-button">colors</span></a></div>
+        </div>
+    </div>
     <script>
-
-        //funzione invio da tastiera
-        function tastiera(event) {
-            if (event.key == "Enter") {
-                document.getElementById("calcola").click();
-            }
+        // apri e chiudi sidebar
+        function openNav() {
+            document.getElementById("sidebar-container").style.width = "80%";
+        }
+        function closeNav() {
+            document.getElementById("sidebar-container").style.width = "0";
         }
 
-        //mostra nascondi elementi
+        // mostra nascondi elementi
         function mostra(stato, id) {
 
             let elemento = document.getElementById(id);
 
             if (stato == 0) {
-                elemento.classList.remove("w3-show");
-                elemento.classList.add("w3-hide");
+                elemento.classList.remove("mg-show");
+                elemento.classList.add("mg-hide");
             } else if (stato == 1) {
-                elemento.classList.remove("w3-hide");
-                elemento.classList.add("w3-show")
+                elemento.classList.remove("mg-hide");
+                elemento.classList.add("mg-show")
             };
         }
 
-        //animazione sui blocchi con classe css mg-shadow
-        function animazione() {
-            var elementi = document.querySelectorAll(".mg-shadow");
-            elementi.forEach(function (elemento) {
-                elemento.classList.add("mg-animate");
+        // colori e indice sfondo
+        const colors = ["#FFC107", "#FF674D", "#2191fb", "#6DD6DA", "#DAC4F7"];
+        let index = 1;
 
-                //rimuove la classe mg-animate al termine dell'animazione
+        // funzione cambia colore sfondo
+        function changeBg() {
+            document.body.style.backgroundColor = colors[index];
+            index = (index + 1) % colors.length;
+        }
+
+        // funzioni da tastiera
+        document.addEventListener("keydown", function (event) {
+            // calcola
+            if (event.key == "Enter") {
+                document.getElementById("calcola").click();
+            }
+            // cambia colore sfondo con c
+            if (event.key == "c") {
+                changeBg();
+            }
+            // mostra nascondi sidebar con i
+            if (event.key == "i") {
+                let width = document.getElementById("sidebar-container").offsetWidth;
+                if (width == 0) {
+                    openNav();
+                } else {
+                    closeNav();
+                }
+            }
+        });
+
+        // animazione tada sui blocchi .mg-animate
+        function animazione() {
+            var elementi = document.querySelectorAll(".mg-animate");
+            elementi.forEach(function (elemento) {
+                elemento.classList.add("mg-tada");
+
+                // rimuove la classe .mg-tada al termine dell'animazione
                 elemento.addEventListener("animationend", function () {
-                    elemento.classList.remove("mg-animate");
+                    elemento.classList.remove("mg-tada");
                 }, { once: true });
             });
         }
 
-        //calcola giorni
+
+        // calcola giorni
         function calcolaGiorni() {
 
-            //data di oggi
+            // data di oggi
             const dataOggi = new Date();
 
-            //data inserita -1 ora per correzione al formato data passato da input
+            // data inserita -1 ora per correzione al formato data passato da input
             const dataInserita = new Date(document.getElementById('data').value);
             dataInserita.setHours(dataInserita.getHours() - 1);
 
-            //mostra blocco risultato1
+            // mostra blocco risultato1
             mostra(1, 'blocco1');
 
-            //controllo se la data è valida (non NaN)
+            // controllo se la data è valida
             if (isNaN(dataInserita)) {
                 document.getElementById('risultato1').textContent = "Inserisci una data valida";
                 return;
             }
 
-            //millisecondi in un giorno
+            // millisecondi in un giorno
             let msGiorno = 1000 * 60 * 60 * 24;
 
-            //calcola la differenza in giorni
+            // calcola la differenza in giorni
             let differenzaGiorni = Math.ceil((dataInserita - dataOggi) / msGiorno);
 
-            //risultato in giorni
+            // risultato in giorni
             if (differenzaGiorni === 0) {
                 document.getElementById('risultato1').textContent = 'È oggi!';
             } else if (differenzaGiorni === -1) {
@@ -197,19 +395,19 @@
 
             if (differenzaGiorni <= -7 || differenzaGiorni >= 7) {
 
-                //mostra blocco risultato2
+                // mostra blocco risultato2
                 mostra(1, 'blocco2');
 
-                //differnza per calcolo anni, mesi, settimane, giorni
+                // differnza per calcolo anni, mesi, settimane, giorni
                 let differenzaGiorniOppure = Math.abs(differenzaGiorni);
 
-                //calcolo approssimato in anni, mesi, settimane, giorni
+                // calcolo approssimato in anni, mesi, settimane, giorni
                 let anni = Math.floor(differenzaGiorniOppure / 365);
                 let mesi = Math.floor((differenzaGiorniOppure % 365) / 30);
                 let settimane = Math.floor(((differenzaGiorniOppure % 365) % 30) / 7);
                 let giorniRimasti = Math.floor(((differenzaGiorniOppure % 365) % 30) % 7);
 
-                //risultato approssimato in anni, mesi, settimane, giorni
+                // risultato approssimato in anni, mesi, settimane, giorni
                 if (anni != 0) {
                     document.getElementById("risultato2").innerHTML = anni + " anni<br/>" + mesi + " mesi</br>" + settimane + " settimane</br>" + giorniRimasti + " giorni</br>";
                 } else if (mesi != 0) {
@@ -219,18 +417,11 @@
                 }
             } else {
 
-                //nascondi blocco risultato2
+                // nascondi blocco risultato2
                 mostra(0, 'blocco2');
             }
-
-            //log console
-            console.log(dataOggi);
-            console.log(dataInserita);
-            console.log(differenzaGiorni);
-        };
-
+        }
     </script>
-
 </body>
 
 </html>
