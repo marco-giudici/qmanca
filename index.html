@@ -194,8 +194,7 @@
                 justify-content: flex-start;
                 width: 100%;
                 background-color: #FFFFFF50;
-                backdrop-filter: blur(10px);
-                -webkit-backdrop-filter: blur(10px);
+
             }
         }
 
@@ -373,6 +372,7 @@
 
             // mostra blocco risultato1
             mostra(1, 'blocco1');
+            mostra(0, 'blocco2');
 
             // controllo se la data è valida
             if (isNaN(dataInserita)) {
@@ -421,10 +421,6 @@
                 } else if (settimane != 0) {
                     document.getElementById("risultato2").innerHTML = settimane + " settimane<br/>" + giorniRimasti + " giorni";
                 }
-            } else {
-
-                // nascondi blocco risultato2
-                mostra(0, 'blocco2');
             }
         }
     </script>
