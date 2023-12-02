@@ -102,7 +102,7 @@
             padding: 20px;
             width: 100%;
             height: 100%;
-            overflow-y: scroll;
+            overflow: auto;
         }
 
         #sidebar-menu,
@@ -114,8 +114,7 @@
             min-height: 70px;
             min-width: 70px;
             padding: 5px;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(1px);
+
         }
 
         #app-container {
@@ -176,28 +175,19 @@
 
             #app-container,
             #sidebar-container {
-                flex-direction: column;
+                flex-direction: column-reverse;
                 align-items: flex-end;
-            }
-
-            #app-container {
-                margin: 10px;
             }
 
             #app-main {
                 margin-left: 0;
-                margin-bottom: 70px;
+                padding: 10px;
             }
 
             #app-menu {
-                position: fixed;
-                bottom: 0;
-                right: 0;
                 flex-direction: row-reverse;
                 justify-content: flex-start;
                 width: 100%;
-                background-color: #FFFFFF50;
-
             }
         }
 
@@ -252,13 +242,14 @@
         <div id="sidebar-main">
             <h1 class="mg-sofia">Quanto manca?</h1>
             <p>Qmanca è un'applicazione semplice ma molto utile che ti permette di calcolare <strong>quanti
-                giorni mancano</strong> ad una certa data.</p>
+                    giorni mancano</strong> ad una certa data.</p>
             <p>Scrivi o seleziona la data desiderata e clicca "calcola". Fatto!</p>
             <p>Il risultato è in giorni e per comodità, viene indicato anche a quanti anni, mesi, settimane
                 corrispondo, approssimando un mese con 30 giorni e un anno con 365 giorni.</p>
             <h2 class="mg-sofia">Funzioni utili</h2>
             <p>Puoi calcolare quanto tempo è passato inserendo una data antecedente ad oggi.</p>
-            <p>Da computer premi "invio" per calcolare i giorni, il tasto "c" per cambiare colore dello sfondo o "i" per aprire e chiudere questo pannello informativo.</p>
+            <p>Da computer premi "invio" per calcolare i giorni, il tasto "c" per cambiare colore dello sfondo o "i" per
+                aprire e chiudere questo pannello informativo.</p>
         </div>
         <div id="sidebar-menu"><a href="javascript:void(0)" onclick="closeNav()"><span
                     class="material-symbols-outlined icon-button">close</span></a></div>
