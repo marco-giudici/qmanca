@@ -13,8 +13,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Sofia&display=swap" rel="stylesheet">
     <!-- Google Icons -->
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <style>
         * {
             box-sizing: border-box;
@@ -246,24 +245,25 @@
             <p>Il risultato è in giorni e per comodità, viene indicato anche a quanti anni, mesi, settimane
                 corrispondo, approssimando un mese con 30 giorni e un anno con 365 giorni.</p>
             <h1 class="mg-sofia">Funzioni utili</h1>
-            <p>Puoi calcolare quanto tempo è passato inserendo una data antecedente ad oggi.</p>
-            <p>Da computer premi "invio" per calcolare i giorni, il tasto "c" per cambiare colore dello sfondo o "i" per
-                aprire e chiudere questo pannello informativo.</p>
+            <p>Puoi calcolare quanto tempo è passato inserendo una data antecedente ad oggi. Da computer puoi usare i tasti:
+            <ul>
+                <li>"invio" per calcolare i giorni </li>
+                <li>"c" per cambiare colore dello sfondo </li>
+                <li>"i" per aprire e chiudere questo pannello informativo</li>
+            </ul>
+            </p>
         </div>
-        <div id="sidebar-menu"><a href="javascript:void(0)" onclick="closeNav()"><span
-                    class="material-symbols-outlined icon-button">close</span></a></div>
+        <div id="sidebar-menu"><a href="javascript:void(0)" onclick="closeNav()"><span class="material-symbols-outlined icon-button">close</span></a></div>
     </div>
     <div id="app-container">
         <div id="app-main">
             <div class="app-container-section">
                 <div class="app-container-block mg-animate" id="inserisci">
-                    <a href="index.html" title="inserisci una nuova data"><img src="assets/hourglass.gif"
-                            alt="quanto manca icona"></a>
+                    <a href="index.html" title="inserisci una nuova data"><img src="assets/hourglass.gif" alt="quanto manca icona"></a>
                     <h1 class="mg-sofia">Quanto manca?</h1>
                     <p>Seleziona un data per sapere quanti giorni mancano:</p>
                     <input type="date" id="data" class="w3-round-medium w3-border w3-border-black">
-                    <button id="calcola" class="w3-button w3-round-medium w3-black w3-border w3-border-black"
-                        onclick="calcolaGiorni(); animazione()">Calcola</button>
+                    <button id="calcola" class="w3-button w3-round-medium w3-black w3-border w3-border-black" onclick="calcolaGiorni(); animazione()">Calcola</button>
                 </div>
             </div>
             <div class="app-container-section mg-hide" id="blocco1">
@@ -280,10 +280,8 @@
             </div>
         </div>
         <div id="app-menu">
-            <div><a href="javascript:void(0)" onclick="openNav()"><span
-                        class="material-symbols-outlined icon-button">info</span></a></div>
-            <div><a href="javascript:void(0)" onclick="changeBg()"><span
-                        class="material-symbols-outlined icon-button">colors</span></a></div>
+            <div><a href="javascript:void(0)" onclick="openNav()"><span class="material-symbols-outlined icon-button">info</span></a></div>
+            <div><a href="javascript:void(0)" onclick="changeBg()"><span class="material-symbols-outlined icon-button">colors</span></a></div>
         </div>
     </div>
     <script>
