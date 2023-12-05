@@ -247,8 +247,9 @@
             <h1 class="mg-sofia">Funzioni utili</h1>
             <p>Puoi calcolare quanto tempo è passato inserendo una data antecedente ad oggi. Da computer puoi usare i tasti:
             <ul>
-                <li>"invio" per calcolare i giorni </li>
-                <li>"c" per cambiare colore dello sfondo </li>
+                <li>"invio" per calcolare i giorni</li>
+                <li>"h" per calcolare una nuova data</li>
+                <li>"c" per cambiare colore dello sfondo</li>
                 <li>"i" per aprire e chiudere questo pannello informativo</li>
             </ul>
             </p>
@@ -322,6 +323,10 @@
             // calcola
             if (event.key == "Enter") {
                 document.getElementById("calcola").click();
+            }
+            // ricarica pagina
+            if (event.key == "h") {
+                location.reload();
             }
             // cambia colore sfondo con c
             if (event.key == "c") {
