@@ -15,6 +15,11 @@
     <!-- Google Icons -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <style>
+        :root {
+            --mg-white: #fdfdfd;
+            --mg-black: #111111;
+        }
+
         * {
             box-sizing: border-box;
         }
@@ -26,7 +31,7 @@
         body {
             margin: 0;
             padding: 0;
-            background-color: #ffc107;
+            background-color: #FFC107;
             font-family: Arial, Helvetica, sans-serif;
             font-size: 16px;
             line-height: 1.5;
@@ -73,9 +78,68 @@
             cursor: pointer
         }
 
+        /* temi colorati */
+        .giallo {
+            background-color: #FFC107;
+        }
+
+        .rosso {
+            background-color: #FF674D;
+        }
+
+        .viola {
+            background-color: #593C8F;
+
+            .text-container,
+            #app-container a {
+                color: var(--mg-white);
+            }
+
+        }
+
+        .blu {
+            background-color: #2191fb;
+        }
+
+        .azzurro {
+            background-color: #6DD6DA;
+        }
+
+
+
+        /* tema Dark Mode */
+        .dark-mode {
+            background-color: #202124;
+            color: var(--mg-white);
+        }
+
+        .dark-mode a {
+            color: var(--mg-white);
+        }
+
+        .dark-mode .app-container-block {
+            background-color: var(--mg-black);
+        }
+
+        .dark-mode button {
+            background-color: #333;
+        }
+
+        .dark-mode #sidebar-container {
+            background-color: var(--mg-black);
+        }
+
+        .dark-mode .icon-button:before {
+            background-color: #FFF;
+        }
+
+
+        /* stuttura */
         .mg-sofia {
             font-family: 'Sofia', cursive;
         }
+
+
 
         #sidebar-container {
             display: flex;
@@ -88,9 +152,9 @@
             z-index: 1;
             height: 100%;
             width: 0;
-            max-width: 600px;
+            max-width: 360px;
             overflow-x: hidden;
-            background-color: #FFF;
+            background-color: var(--mg-white);
             transition: 0.1s ease-in-out;
             border-radius: 20px 0 0 20px;
             box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
@@ -141,7 +205,7 @@
         .app-container-block {
             padding: 20px;
             border-radius: 20px;
-            background-color: #FFF;
+            background-color: var(--mg-white);
             box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
             text-align: center;
         }
@@ -244,11 +308,12 @@
             <p>Scrivi o seleziona la data desiderata e clicca "calcola". Fatto!</p>
             <p>Il risultato è in giorni e per comodità, viene indicato anche a quanti anni, mesi, settimane
                 corrispondo, approssimando un mese con 30 giorni e un anno con 365 giorni.</p>
-            <h1 class="mg-sofia">Funzioni utili</h1>
-            <p>Puoi calcolare quanto tempo è passato inserendo una data antecedente ad oggi. Da computer puoi usare i tasti:
+            <h1 class="mg-sofia">Da Tastiera</h1>
+            <p>Puoi usare queste scorciatoie da tastiera:
             <ul>
                 <li>"invio" per calcolare i giorni</li>
-                <li>"h" per calcolare una nuova data</li>
+                <li>"r" per calcolare una nuova data</li>
+                <li>"d" per il tema scuro</li>
                 <li>"c" per cambiare colore dello sfondo</li>
                 <li>"i" per aprire e chiudere questo pannello informativo</li>
             </ul>
@@ -272,20 +337,22 @@
                 </div>
             </div>
             <div class="app-container-section mg-hide" id="blocco2">
-                <p>che corrispondo a:</p>
+                <p class="text-container">che corrispondo a:</p>
                 <div class="app-container-block mg-animate">
                     <h2 class="mg-sofia" id="risultato2"></h2>
                 </div>
-                <p>approssimando un mese con 30 giorni e un anno con 365 giorni.</p>
+                <p class="text-container">approssimando un mese con 30 giorni e un anno con 365 giorni.</p>
             </div>
         </div>
         <div id="app-menu">
             <div><a href="javascript:void(0)" onclick="openNav()" title="informazioni"><span class="material-symbols-outlined icon-button">info</span></a></div>
             <div><a href="javascript:location.reload();" title="inserisci nuova data"><span class="material-symbols-outlined icon-button">calendar_month</span></a></div>
-            <div><a href="javascript:void(0)" onclick="changeBg()" title="cambia colore dello sfondo"><span class="material-symbols-outlined icon-button">colors</span></a></div>
+            <div><a href="javascript:void(0)" onclick="darkMode()" title="dark mode"><span class="material-symbols-outlined icon-button" id="dark-toggle">dark_mode</span></a></div>
+            <div><a href="javascript:void(0)" onclick="cambiaTema()" title="cambia tema"><span class="material-symbols-outlined icon-button">colors</span></a></div>
         </div>
     </div>
     <script>
+
         // apri e chiudi sidebar
         function openNav() {
             document.getElementById("sidebar-container").style.width = "80%";
@@ -308,15 +375,54 @@
             };
         }
 
-        // colori e indice sfondo
-        const colors = ["#FFC107", "#FF674D", "#2191fb", "#6DD6DA", "#DAC4F7"];
+        // controllo se il tema è impostato
+        const currentTheme = localStorage.getItem("theme");
+        const darkModeStatus = localStorage.getItem("dark-mode");
+
+        if (currentTheme != null) {
+            document.body.className = currentTheme;
+        }
+        if (darkModeStatus == "on") {
+            document.body.classList.toggle("dark-mode");
+            document.getElementById("dark-toggle").textContent = "light_mode";
+        }
+
+        // temi e indice
+        const colors = ["giallo", "rosso", "viola", "blu", "azzurro"];
         let index = 1;
 
-        // funzione cambia colore sfondo
-        function changeBg() {
-            document.body.style.backgroundColor = colors[index];
+        // funzione cambia tema
+        function cambiaTema() {
+
+            // rimuovo dark mode
+            localStorage.removeItem("dark-mode");
+            document.getElementById("dark-toggle").textContent = "dark_mode";
+
+            // applico la classe del tema
+            document.body.className = colors[index];
+
+            // memorizzo tema in localStorage
+            localStorage.setItem("theme", colors[index]);
+
+            // indice
             index = (index + 1) % colors.length;
         }
+
+        // funzione tema dark mode
+        function darkMode() {
+
+            document.body.classList.toggle("dark-mode");
+
+            // localStorage e icona Dark Mode
+            if (document.body.classList.contains("dark-mode")) {
+                localStorage.setItem("dark-mode", "on");
+                document.getElementById("dark-toggle").textContent = "light_mode";
+            } else {
+                localStorage.removeItem("dark-mode");
+                document.getElementById("dark-toggle").textContent = "dark_mode";
+            }
+
+        };
 
         // funzioni da tastiera
         document.addEventListener("keydown", function (event) {
@@ -325,14 +431,18 @@
                 document.getElementById("calcola").click();
             }
             // ricarica pagina
-            if (event.key == "h") {
+            if (event.key == "r") {
                 location.reload();
             }
-            // cambia colore sfondo con c
-            if (event.key == "c") {
-                changeBg();
+            // dark mode
+            if (event.key == "d") {
+                darkMode();
             }
-            // mostra nascondi sidebar con i
+            // cambia tema
+            if (event.key == "c") {
+                cambiaTema();
+            }
+            // mostra nascondi sidebar
             if (event.key == "i") {
                 let width = document.getElementById("sidebar-container").offsetWidth;
                 if (width == 0) {
@@ -355,7 +465,6 @@
                 }, { once: true });
             });
         }
-
 
         // calcola giorni
         function calcolaGiorni() {
