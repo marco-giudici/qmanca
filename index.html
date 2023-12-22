@@ -18,6 +18,7 @@
         :root {
             --mg-white: #fdfdfd;
             --mg-black: #111111;
+            --mg-dark: #202124;
         }
 
         * {
@@ -31,7 +32,6 @@
         body {
             margin: 0;
             padding: 0;
-            background-color: #FFC107;
             font-family: Arial, Helvetica, sans-serif;
             font-size: 16px;
             line-height: 1.5;
@@ -79,37 +79,34 @@
         }
 
         /* temi colorati */
-        .giallo {
-            background-color: #FFC107;
+        .tema1 {
+            background-color: #fdc100;
         }
 
-        .rosso {
-            background-color: #FF674D;
+        .tema2 {
+            background-color: #fed811;
         }
 
-        .viola {
-            background-color: #593C8F;
+        .tema3 {
+            background-color: #b4ffff;
+        }
 
-            .text-container,
-            #app-container a {
+        .tema4 {
+            background-color: #02cecb;
+        }
+
+        .tema5 {
+            background-color: #06837f;
+
+            #app-menu a {
                 color: var(--mg-white);
             }
 
         }
 
-        .blu {
-            background-color: #2191fb;
-        }
-
-        .azzurro {
-            background-color: #6DD6DA;
-        }
-
-
-
         /* tema Dark Mode */
         .dark-mode {
-            background-color: #202124;
+            background-color: var(--mg-dark);
             color: var(--mg-white);
         }
 
@@ -122,11 +119,15 @@
         }
 
         .dark-mode button {
-            background-color: #333;
+            background-color: var(--mg-dark);
         }
 
         .dark-mode #sidebar-container {
             background-color: var(--mg-black);
+        }
+
+        .dark-mode .risultato {
+            background-color: var(--mg-dark);
         }
 
         .dark-mode .icon-button:before {
@@ -208,6 +209,10 @@
             background-color: var(--mg-white);
             box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
             text-align: center;
+        }
+
+        #risultato-container {
+            margin-top: 40px;
         }
 
         .icon-button {
@@ -295,11 +300,21 @@
         .mg-hide {
             display: none;
         }
+
+
+        /* test */
+
+        .risultato {
+            margin: 10px;
+            padding: 10px;
+            background-color: #eeeeee;
+            border-radius: 20px;
+        }
     </style>
 
 </head>
 
-<body>
+<body class="tema1">
     <div id="sidebar-container">
         <div id="sidebar-main">
             <h1 class="mg-sofia">Quanto manca?</h1>
@@ -329,24 +344,23 @@
                     <p>Seleziona un data per sapere quanti giorni mancano:</p>
                     <input type="date" id="data" class="w3-round-medium w3-border w3-border-black">
                     <button id="calcola" class="w3-button w3-round-medium w3-black w3-border w3-border-black" onclick="calcolaGiorni(); animazione()">Calcola</button>
+                    <div id="risultato-container" class="mg-hide">
+                        <div id="risultato-block-1" class="risultato">
+                            <h1 class="mg-sofia" id="risultato1"></h1>
+                        </div>
+                        <div id="risultato-block-2" class="risultato mg-hide">
+                            <small>oppure</small>
+                            <h2 class="mg-sofia" id="risultato2"></h2>
+                            <small>approssimando un mese con 30 giorni e un anno con 365 giorni.</small>
+                        </div>
+                        <div><a href="javascript:location.reload();" title="inserisci nuova data"><span class="material-symbols-outlined icon-button">refresh</span></a></div>
+                    </div>
                 </div>
             </div>
-            <div class="app-container-section mg-hide" id="blocco1">
-                <div class="app-container-block mg-animate">
-                    <h1 class="mg-sofia" id="risultato1"></h1>
-                </div>
-            </div>
-            <div class="app-container-section mg-hide" id="blocco2">
-                <p class="text-container">che corrispondo a:</p>
-                <div class="app-container-block mg-animate">
-                    <h2 class="mg-sofia" id="risultato2"></h2>
-                </div>
-                <p class="text-container">approssimando un mese con 30 giorni e un anno con 365 giorni.</p>
-            </div>
+
         </div>
         <div id="app-menu">
             <div><a href="javascript:void(0)" onclick="openNav()" title="informazioni"><span class="material-symbols-outlined icon-button">info</span></a></div>
-            <div><a href="javascript:location.reload();" title="inserisci nuova data"><span class="material-symbols-outlined icon-button">calendar_month</span></a></div>
             <div><a href="javascript:void(0)" onclick="darkMode()" title="dark mode"><span class="material-symbols-outlined icon-button" id="dark-toggle">dark_mode</span></a></div>
             <div><a href="javascript:void(0)" onclick="cambiaTema()" title="cambia tema"><span class="material-symbols-outlined icon-button">colors</span></a></div>
         </div>
@@ -388,7 +402,7 @@
         }
 
         // temi e indice
-        const colors = ["giallo", "rosso", "viola", "blu", "azzurro"];
+        const colors = ["tema1", "tema2", "tema3", "tema4", "tema5"];
         let index = 1;
 
         // funzione cambia tema
@@ -476,41 +490,34 @@
             const dataInserita = new Date(document.getElementById('data').value);
             dataInserita.setHours(dataInserita.getHours() - 1);
 
-            // mostra blocco risultato1 nascondo risultato2
-            mostra(1, 'blocco1');
-            mostra(0, 'blocco2');
-
-            // controllo se la data è valida
-            if (isNaN(dataInserita)) {
-                document.getElementById('risultato1').textContent = "Inserisci una data valida";
-                return;
-            }
-
             // millisecondi in un giorno
             let msGiorno = 1000 * 60 * 60 * 24;
 
             // calcola la differenza in giorni
             let differenzaGiorni = Math.ceil((dataInserita - dataOggi) / msGiorno);
 
+            // blocco
+            mostra(1, 'risultato-container');
+            mostra(0, 'risultato-block-2');
+
             // risultato in giorni
-            if (differenzaGiorni === 0) {
+
+            if (isNaN(differenzaGiorni)) {
+                document.getElementById('risultato1').textContent = 'Inserisci una data valida!!';
+            } else if (differenzaGiorni === 0) {
                 document.getElementById('risultato1').textContent = 'È oggi!';
-            } else if (differenzaGiorni === -1) {
-                document.getElementById('risultato1').textContent = 'È ieri!';
+            } else if (differenzaGiorni < 1) {
+                document.getElementById('risultato1').textContent = 'Inserisci una data futura 🙃';
             } else if (differenzaGiorni === 1) {
                 document.getElementById('risultato1').textContent = 'È domani!';
-            } else if (differenzaGiorni < 0) {
-                document.getElementById('risultato1').textContent = 'Sono passati ' + Math.abs(differenzaGiorni) + ' giorni';
             } else {
                 document.getElementById('risultato1').textContent = 'Mancano ' + differenzaGiorni + ' giorni';
             }
 
-            if (differenzaGiorni <= -7 || differenzaGiorni >= 7) {
+            if (differenzaGiorni >= 7) {
+                mostra(1, 'risultato-block-2');
 
-                // mostra blocco risultato2
-                mostra(1, 'blocco2');
-
-                // differnza per calcolo anni, mesi, settimane, giorni
+                // differenza per calcolo anni, mesi, settimane, giorni
                 let differenzaGiorniOppure = Math.abs(differenzaGiorni);
 
                 // calcolo approssimato in anni, mesi, settimane, giorni
