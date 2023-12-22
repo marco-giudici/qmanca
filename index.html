@@ -333,7 +333,7 @@
     <div id="app-container">
         <div id="app-main">
             <div class="app-container-section">
-                <div class="app-container-block mg-animate" id="inserisci">
+                <div class="app-container-block" id="qmanca-giorni">
                     <h1 class="mg-sofia">Quanto manca?</h1>
                     <p>Seleziona un data per sapere quanti giorni mancano:</p>
                     <input type="date" id="data" class="w3-round-medium w3-border w3-border-black">
@@ -369,7 +369,7 @@
             document.getElementById("sidebar-container").style.width = "0";
         }
 
-        // mostra / nascondi elementi
+        // mostra o nascondi elementi
         function mostra(stato, id) {
 
             let elemento = document.getElementById(id);
@@ -381,6 +381,12 @@
                 elemento.classList.remove("mg-hide");
                 elemento.classList.add("mg-show")
             };
+        }
+
+        // aggiunge classe animazione .mg-animate
+        function aggiungiAnimazione(id) {
+            let elemento = document.getElementById(id);
+            elemento.classList.add("mg-animate");
         }
 
         // controllo se il tema è impostato
@@ -491,9 +497,10 @@
             // calcola la differenza in giorni
             let differenzaGiorni = Math.ceil((dataInserita - dataOggi) / msGiorno);
 
-            // blocchi risultati
+            // blocchi risultati e classe animazione
             mostra(1, 'risultato-container');
             mostra(0, 'risultato-block-2');
+            aggiungiAnimazione('qmanca-giorni');
 
             // risultato in giorni
             if (isNaN(differenzaGiorni)) {
