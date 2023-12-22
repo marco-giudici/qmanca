@@ -134,14 +134,20 @@
             background-color: #FFF;
         }
 
-
-        /* stuttura */
+        /* custom mg */
         .mg-sofia {
             font-family: 'Sofia', cursive;
         }
 
+        .mg-show {
+            display: block;
+        }
 
+        .mg-hide {
+            display: none;
+        }
 
+        /* stuttura */
         #sidebar-container {
             display: flex;
             flex-direction: row;
@@ -213,6 +219,13 @@
 
         #risultato-container {
             margin-top: 40px;
+        }
+
+        .risultato {
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #eeeeee;
+            border-radius: 20px;
         }
 
         .icon-button {
@@ -292,24 +305,6 @@
             animation-duration: 1s;
             animation-iteration-count: 1;
         }
-
-        .mg-show {
-            display: block;
-        }
-
-        .mg-hide {
-            display: none;
-        }
-
-
-        /* test */
-
-        .risultato {
-            margin: 10px;
-            padding: 10px;
-            background-color: #eeeeee;
-            border-radius: 20px;
-        }
     </style>
 
 </head>
@@ -318,8 +313,7 @@
     <div id="sidebar-container">
         <div id="sidebar-main">
             <h1 class="mg-sofia">Quanto manca?</h1>
-            <p>Qmanca è un'applicazione semplice ma molto utile che ti permette di calcolare <strong>quanti
-                    giorni mancano</strong> ad una certa data.</p>
+            <p>Qmanca è un'applicazione semplice ma molto utile che ti permette di calcolare <strong>quanti giorni mancano</strong> ad una certa data.</p>
             <p>Scrivi o seleziona la data desiderata e clicca "calcola". Fatto!</p>
             <p>Il risultato è in giorni e per comodità, viene indicato anche a quanti anni, mesi, settimane
                 corrispondo, approssimando un mese con 30 giorni e un anno con 365 giorni.</p>
@@ -350,7 +344,7 @@
                         </div>
                         <div id="risultato-block-2" class="risultato mg-hide">
                             <small>oppure</small>
-                            <h2 class="mg-sofia" id="risultato2"></h2>
+                            <h1 class="mg-sofia" id="risultato2"></h1>
                             <small>approssimando un mese con 30 giorni e un anno con 365 giorni.</small>
                         </div>
                         <div><a href="javascript:location.reload();" title="inserisci nuova data"><span class="material-symbols-outlined icon-button">refresh</span></a></div>
@@ -375,7 +369,7 @@
             document.getElementById("sidebar-container").style.width = "0";
         }
 
-        // mostra nascondi elementi
+        // mostra / nascondi elementi
         function mostra(stato, id) {
 
             let elemento = document.getElementById(id);
@@ -440,6 +434,7 @@
 
         // funzioni da tastiera
         document.addEventListener("keydown", function (event) {
+
             // calcola
             if (event.key == "Enter") {
                 document.getElementById("calcola").click();
@@ -496,12 +491,11 @@
             // calcola la differenza in giorni
             let differenzaGiorni = Math.ceil((dataInserita - dataOggi) / msGiorno);
 
-            // blocco
+            // blocchi risultati
             mostra(1, 'risultato-container');
             mostra(0, 'risultato-block-2');
 
             // risultato in giorni
-
             if (isNaN(differenzaGiorni)) {
                 document.getElementById('risultato1').textContent = 'Inserisci una data valida!!';
             } else if (differenzaGiorni === 0) {
