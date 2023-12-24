@@ -100,7 +100,8 @@
         .tema5 {
             background-color: #E27396;
 
-            #app-menu a {
+            #app-menu a,
+            #footer {
                 color: var(--mg-white);
             }
 
@@ -307,6 +308,11 @@
             animation-duration: 1s;
             animation-iteration-count: 1;
         }
+
+        #footer {
+            margin: 20px;
+            text-align: center;
+        }
     </style>
 
 </head>
@@ -314,16 +320,13 @@
 <body class="tema1">
     <div id="sidebar-container">
         <div id="sidebar-main">
-            <h1 class="mg-sofia">Quanto manca?</h1>
-            <p>Qmanca è un'applicazione semplice ma molto utile che ti permette di calcolare <strong>quanti giorni mancano</strong> ad una certa data.</p>
-            <p>Scrivi o seleziona la data desiderata e clicca "calcola". Fatto!</p>
-            <p>Il risultato è in giorni e per comodità, viene indicato anche a quanti anni, mesi, settimane
-                corrispondo, approssimando un mese con 30 giorni e un anno con 365 giorni.</p>
+            <h1 class="mg-sofia">Cos'è Qmanca?</h1>
+            <p>Qmanca è un'applicazione semplice ma molto utile che ti permette di calcolare <strong>quanti giorni mancano</strong> ad una certa data oppure <strong>che data sarà tra "n" giorni</strong>.</p>
             <h1 class="mg-sofia">Da Tastiera</h1>
             <p>Puoi usare queste scorciatoie da tastiera:
             <ul>
-                <li>"1" per calcolare quanti giorni mancano</li>
-                <li>"2" per calcolare una data futura</li>
+                <li>"ctrl + 1" per calcolare quanti giorni mancano</li>
+                <li>"ctrl + 2" per calcolare una data futura</li>
                 <li>"r" per calcolare una nuova data</li>
                 <li>"d" per il tema scuro</li>
                 <li>"c" per cambiare colore dello sfondo</li>
@@ -359,9 +362,7 @@
             <div class="app-main-section">
                 <div class="app-main-section-block" id="qmanca-data">
                     <h1 class="mg-sofia">Che giorno sarà?</h1>
-                    <p>Inserisci il numero di giorni mancanti per calcolare una data futura.</p>
-                    <input type="number" id="giorni-input" min="0" max="1000000" step="10">
-                    <button id="calcola-data" onclick="calcolaData();">Calcola</button>
+                    <p>Inserisci il numero di giorni mancanti per calcolare una data futura.</p> <input type="number" id="giorni-input" min="0" max="1000000" step="10"> <button id="calcola-data" onclick="calcolaData();">Calcola</button>
                     <div id="qmanca-data-risultato-blocco" class="mg-hide">
                         <div class="risultato">
                             <h1 class="mg-sofia" id="qmanca-data-risultato"></h1>
@@ -378,6 +379,7 @@
             <div><a href="javascript:void(0)" onclick="cambiaTema()" title="cambia tema"><span class="material-symbols-outlined icon-button">colors</span></a></div>
         </div>
     </div>
+    <div id="footer"><small>mg@qmanca 2023</small></div>
     <script>
 
         // apri e chiudi sidebar
@@ -468,11 +470,11 @@
         document.addEventListener("keydown", function (event) {
 
             // calcola giorni
-            if (event.key == "1") {
+            if (event.key == "1" && event.ctrlKey) {
                 document.getElementById("calcola-giorni").click();
             }
             // calcola data
-            if (event.key == "2") {
+            if (event.key == "2" && event.ctrlKey) {
                 document.getElementById("calcola-data").click();
             }
             // ricarica pagina
