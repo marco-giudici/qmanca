@@ -516,7 +516,7 @@
             // blocchi risultati e animazione
             mostra(1, 'risultato-container');
             mostra(0, 'risultato-block-2');
-            //animazione('qmanca-giorni');
+            animazione('qmanca-giorni');
 
             // risultato in giorni
             if (isNaN(differenzaGiorni)) {
@@ -564,6 +564,8 @@
             // Verifica se l'input è valido
             if (giorniInput === "" || numeroGiorni <= 0) {
                 mostra(1, 'qmanca-data-risultato-blocco')
+                animazione('qmanca-data');
+
                 document.getElementById('qmanca-data-risultato').textContent = 'Inserisci un numero valido!';
                 return;
             }
@@ -581,6 +583,9 @@
 
             // Mostra il risultato
             mostra(1, 'qmanca-data-risultato-blocco')
+            animazione('qmanca-data');
+            document.getElementById("qmanca-data").scrollIntoView();
+
             document.getElementById('qmanca-data-risultato').textContent = dataFuturaFormattata;
         }
 
