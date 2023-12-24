@@ -475,7 +475,6 @@
             if (event.key == "2") {
                 document.getElementById("calcola-data").click();
             }
-
             // ricarica pagina
             if (event.key == "r") {
                 location.reload();
@@ -548,8 +547,13 @@
                 // risultato approssimato in anni, mesi, settimane, giorni
                 if (anni != 0) {
                     document.getElementById("qmanca-giorni-risultato2").innerHTML = anni + " anni<br/>" + mesi + " mesi</br>" + settimane + " settimane</br>" + giorniRimasti + " giorni</br>";
+                } else if (mesi != 0 && settimane == 0) {
+                    document.getElementById("qmanca-giorni-risultato2").innerHTML = mesi + " mesi</br>" + giorniRimasti + " giorni";
                 } else if (mesi != 0) {
                     document.getElementById("qmanca-giorni-risultato2").innerHTML = mesi + " mesi</br>" + settimane + " settimane</br>" + giorniRimasti + " giorni";
+                }
+                else if (settimane != 0 && giorniRimasti == 0) {
+                    document.getElementById("qmanca-giorni-risultato2").innerHTML = settimane + " settimane<br/>";
                 } else if (settimane != 0) {
                     document.getElementById("qmanca-giorni-risultato2").innerHTML = settimane + " settimane<br/>" + giorniRimasti + " giorni";
                 }
