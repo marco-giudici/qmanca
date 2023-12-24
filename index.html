@@ -406,6 +406,8 @@
         function animazione(id) {
             let elemento = document.getElementById(id);
             elemento.classList.add("mg-tada");
+            elemento.scrollIntoView();
+
 
             // rimuove la classe .mg-tada al termine dell'animazione
             elemento.addEventListener("animationend", function () {
@@ -517,7 +519,6 @@
             mostra(1, 'risultato-container');
             mostra(0, 'risultato-block-2');
             animazione('qmanca-giorni');
-            document.getElementById("qmanca-giorni").scrollIntoView();
 
 
             // risultato in giorni
@@ -586,7 +587,6 @@
             // Mostra il risultato
             mostra(1, 'qmanca-data-risultato-blocco')
             animazione('qmanca-data');
-            document.getElementById("qmanca-data").scrollIntoView();
 
             document.getElementById('qmanca-data-risultato').textContent = dataFuturaFormattata;
         }
