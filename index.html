@@ -82,23 +82,23 @@
 
         /* temi colorati */
         .tema1 {
-            background-color: #fdc100;
+            background-color: #B3DEE2;
         }
 
         .tema2 {
-            background-color: #fed811;
+            background-color: #EAF2D7;
         }
 
         .tema3 {
-            background-color: #b4ffff;
+            background-color: #EFCFE3;
         }
 
         .tema4 {
-            background-color: #02cecb;
+            background-color: #EA9AB2;
         }
 
         .tema5 {
-            background-color: #06837f;
+            background-color: #E27396;
 
             #app-menu a {
                 color: var(--mg-white);
@@ -520,7 +520,6 @@
             mostra(0, 'risultato-block-2');
             animazione('qmanca-giorni');
 
-
             // risultato in giorni
             if (isNaN(differenzaGiorni)) {
                 document.getElementById('qmanca-giorni-risultato1').textContent = 'Inserisci una data valida!';
@@ -558,37 +557,33 @@
         }
 
         function calcolaData() {
-            // Ottieni il numero di giorni inserito dall'utente
+            // ottieni il numero di giorni inserito dall'utente
             let giorniInput = document.getElementById("giorni-input").value;
 
             // da stringa a numero intero
             let numeroGiorni = parseInt(giorniInput);
 
-            // Verifica se l'input è valido
-            if (giorniInput === "" || numeroGiorni <= 0) {
-                mostra(1, 'qmanca-data-risultato-blocco')
-                animazione('qmanca-data');
-
-                document.getElementById('qmanca-data-risultato').textContent = 'Inserisci un numero valido!';
-                return;
-            }
-
-            // Ottieni la data attuale
+            // ottieni la data attuale
             var dataAttuale = new Date();
 
-            // Calcola la data futura
+            // calcola la data futura
             var dataFutura = new Date();
             dataFutura.setDate(dataAttuale.getDate() + numeroGiorni);
 
-            // Formatta la data
+            // formatta la data
             var formatoData = { year: 'numeric', month: 'long', day: 'numeric' };
             var dataFuturaFormattata = dataFutura.toLocaleDateString('it-IT', formatoData);
 
-            // Mostra il risultato
+            // verifica l'input e mostra il risultato
             mostra(1, 'qmanca-data-risultato-blocco')
             animazione('qmanca-data');
 
-            document.getElementById('qmanca-data-risultato').textContent = dataFuturaFormattata;
+            if (giorniInput === "" || numeroGiorni <= 0) {
+                document.getElementById('qmanca-data-risultato').textContent = 'Inserisci un numero valido!';
+                return;
+            } else {
+                document.getElementById('qmanca-data-risultato').textContent = dataFuturaFormattata;
+            }
         }
 
     </script>
