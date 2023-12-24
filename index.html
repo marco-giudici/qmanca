@@ -320,7 +320,8 @@
             <h1 class="mg-sofia">Da Tastiera</h1>
             <p>Puoi usare queste scorciatoie da tastiera:
             <ul>
-                <li>"invio" per calcolare i giorni</li>
+                <li>"1" per calcolare quanti giorni mancano</li>
+                <li>"2" per calcolare una data futura</li>
                 <li>"r" per calcolare una nuova data</li>
                 <li>"d" per il tema scuro</li>
                 <li>"c" per cambiare colore dello sfondo</li>
@@ -332,22 +333,38 @@
     </div>
     <div id="app-container">
         <div id="app-main">
+
             <div class="app-main-section">
                 <div class="app-main-section-block" id="qmanca-giorni">
                     <h1 class="mg-sofia">Quanto manca?</h1>
-                    <p>Seleziona un data per sapere quanti giorni mancano:</p>
-                    <input type="date" id="data" class="w3-round-medium w3-border w3-border-black">
-                    <button id="calcola" class="w3-button w3-round-medium w3-black w3-border w3-border-black" onclick="calcolaGiorni(); animazione()">Calcola</button>
+                    <p>Inserisci una data per sapere quanti giorni mancano.</p>
+                    <input type="date" id="data">
+                    <button id="calcola-giorni" onclick="calcolaGiorni();">Calcola</button>
                     <div id="risultato-container" class="mg-hide">
                         <div id="risultato-block-1" class="risultato">
-                            <h1 class="mg-sofia" id="risultato1"></h1>
+                            <h1 class="mg-sofia" id="qmanca-giorni-risultato1"></h1>
                         </div>
                         <div id="risultato-block-2" class="risultato mg-hide">
                             <small>oppure</small>
-                            <h1 class="mg-sofia" id="risultato2"></h1>
+                            <h1 class="mg-sofia" id="qmanca-giorni-risultato2"></h1>
                             <small>approssimando un mese con 30 giorni e un anno con 365 giorni.</small>
                         </div>
                         <div><a href="javascript:location.reload();" title="inserisci nuova data"><span class="material-symbols-outlined icon-button">refresh</span></a></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="app-main-section">
+                <div class="app-main-section-block" id="qmanca-data">
+                    <h1 class="mg-sofia">Che giorno sarà?</h1>
+                    <p>Inserisci il numero di giorni mancanti per calcolare una data futura.</p>
+                    <input type="number" id="giorni-input" min="0" max="1000000" step="10">
+                    <button id="calcola-data" onclick="calcolaData();">Calcola</button>
+                    <div id="qmanca-data-risultato-blocco" class="mg-hide">
+                        <div class="risultato">
+                            <h1 class="mg-sofia" id="qmanca-data-risultato"></h1>
+                        </div>
+                        <div><a href="javascript:location.reload();" title="inserisci nuova numero"><span class="material-symbols-outlined icon-button">refresh</span></a></div>
                     </div>
                 </div>
             </div>
@@ -383,10 +400,15 @@
             };
         }
 
-        // aggiunge classe animazione .mg-animate
-        function aggiungiAnimazione(id) {
+        // aggiunge classe animazione .mg-tada
+        function animazione(id) {
             let elemento = document.getElementById(id);
-            elemento.classList.add("mg-animate");
+            elemento.classList.add("mg-tada");
+
+            // rimuove la classe .mg-tada al termine dell'animazione
+            elemento.addEventListener("animationend", function () {
+                elemento.classList.remove("mg-tada");
+            }, { once: true });
         }
 
         // controllo se il tema è impostato
@@ -441,10 +463,15 @@
         // funzioni da tastiera
         document.addEventListener("keydown", function (event) {
 
-            // calcola
-            if (event.key == "Enter") {
-                document.getElementById("calcola").click();
+            // calcola giorni
+            if (event.key == "1") {
+                document.getElementById("calcola-giorni").click();
             }
+            // calcola data
+            if (event.key == "2") {
+                document.getElementById("calcola-data").click();
+            }
+
             // ricarica pagina
             if (event.key == "r") {
                 location.reload();
@@ -468,19 +495,6 @@
             }
         });
 
-        // animazione tada sui blocchi .mg-animate
-        function animazione() {
-            var elementi = document.querySelectorAll(".mg-animate");
-            elementi.forEach(function (elemento) {
-                elemento.classList.add("mg-tada");
-
-                // rimuove la classe .mg-tada al termine dell'animazione
-                elemento.addEventListener("animationend", function () {
-                    elemento.classList.remove("mg-tada");
-                }, { once: true });
-            });
-        }
-
         // calcola giorni
         function calcolaGiorni() {
 
@@ -497,22 +511,22 @@
             // calcola la differenza in giorni
             let differenzaGiorni = Math.ceil((dataInserita - dataOggi) / msGiorno);
 
-            // blocchi risultati e classe animazione
+            // blocchi risultati e animazione
             mostra(1, 'risultato-container');
             mostra(0, 'risultato-block-2');
-            aggiungiAnimazione('qmanca-giorni');
+            //animazione('qmanca-giorni');
 
             // risultato in giorni
             if (isNaN(differenzaGiorni)) {
-                document.getElementById('risultato1').textContent = 'Inserisci una data valida!!';
+                document.getElementById('qmanca-giorni-risultato1').textContent = 'Inserisci una data valida!';
             } else if (differenzaGiorni === 0) {
-                document.getElementById('risultato1').textContent = 'È oggi!';
+                document.getElementById('qmanca-giorni-risultato1').textContent = 'È oggi!';
             } else if (differenzaGiorni < 1) {
-                document.getElementById('risultato1').textContent = 'Inserisci una data futura 🙃';
+                document.getElementById('qmanca-giorni-risultato1').textContent = 'Inserisci una data futura 🙃';
             } else if (differenzaGiorni === 1) {
-                document.getElementById('risultato1').textContent = 'È domani!';
+                document.getElementById('qmanca-giorni-risultato1').textContent = 'È domani!';
             } else {
-                document.getElementById('risultato1').textContent = 'Mancano ' + differenzaGiorni + ' giorni';
+                document.getElementById('qmanca-giorni-risultato1').textContent = 'Mancano ' + differenzaGiorni + ' giorni';
             }
 
             if (differenzaGiorni >= 7) {
@@ -529,14 +543,45 @@
 
                 // risultato approssimato in anni, mesi, settimane, giorni
                 if (anni != 0) {
-                    document.getElementById("risultato2").innerHTML = anni + " anni<br/>" + mesi + " mesi</br>" + settimane + " settimane</br>" + giorniRimasti + " giorni</br>";
+                    document.getElementById("qmanca-giorni-risultato2").innerHTML = anni + " anni<br/>" + mesi + " mesi</br>" + settimane + " settimane</br>" + giorniRimasti + " giorni</br>";
                 } else if (mesi != 0) {
-                    document.getElementById("risultato2").innerHTML = mesi + " mesi</br>" + settimane + " settimane</br>" + giorniRimasti + " giorni";
+                    document.getElementById("qmanca-giorni-risultato2").innerHTML = mesi + " mesi</br>" + settimane + " settimane</br>" + giorniRimasti + " giorni";
                 } else if (settimane != 0) {
-                    document.getElementById("risultato2").innerHTML = settimane + " settimane<br/>" + giorniRimasti + " giorni";
+                    document.getElementById("qmanca-giorni-risultato2").innerHTML = settimane + " settimane<br/>" + giorniRimasti + " giorni";
                 }
             }
         }
+
+        function calcolaData() {
+            // Ottieni il numero di giorni inserito dall'utente
+            let giorniInput = document.getElementById("giorni-input").value;
+
+            // da stringa a numero intero
+            let numeroGiorni = parseInt(giorniInput);
+
+            // Verifica se l'input è valido
+            if (giorniInput === "" || numeroGiorni <= 0) {
+                mostra(1, 'qmanca-data-risultato-blocco')
+                document.getElementById('qmanca-data-risultato').textContent = 'Inserisci un numero valido!';
+                return;
+            }
+
+            // Ottieni la data attuale
+            var dataAttuale = new Date();
+
+            // Calcola la data futura
+            var dataFutura = new Date();
+            dataFutura.setDate(dataAttuale.getDate() + numeroGiorni);
+
+            // Formatta la data
+            var formatoData = { year: 'numeric', month: 'long', day: 'numeric' };
+            var dataFuturaFormattata = dataFutura.toLocaleDateString('it-IT', formatoData);
+
+            // Mostra il risultato
+            mostra(1, 'qmanca-data-risultato-blocco')
+            document.getElementById('qmanca-data-risultato').textContent = dataFuturaFormattata;
+        }
+
     </script>
 </body>
 
