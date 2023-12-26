@@ -321,12 +321,13 @@
     <div id="sidebar-container">
         <div id="sidebar-main">
             <h1 class="mg-sofia">Cos'è Qmanca?</h1>
-            <p>Qmanca è un'applicazione semplice ma molto utile che ti permette di calcolare <strong>quanti giorni mancano</strong> ad una certa data oppure <strong>che data sarà tra "n" giorni</strong>.</p>
+            <p>Qmanca è un'applicazione semplice ma molto utile che ti permette di calcolare <strong>quanti giorni mancano</strong> ad una certa data oppure <strong>che data sarà tra "n" giorni</strong>. Qmanca può anche calcolare quanti anni ha una persona inserendo la data o anno di nascita.</p>
             <h1 class="mg-sofia">Da Tastiera</h1>
             <p>Puoi usare queste scorciatoie da tastiera:
             <ul>
                 <li>"ctrl + 1" per calcolare quanti giorni mancano</li>
                 <li>"ctrl + 2" per calcolare una data futura</li>
+                <li>"ctrl + 3" per calcolare l'età</li>
                 <li>"r" per calcolare una nuova data</li>
                 <li>"d" per il tema scuro</li>
                 <li>"c" per cambiare colore dello sfondo</li>
@@ -344,7 +345,7 @@
                     <h1 class="mg-sofia">Quanto manca?</h1>
                     <p>Inserisci una data per sapere quanti giorni mancano.</p>
                     <input type="date" id="data">
-                    <button id="calcola-giorni" onclick="calcolaGiorni();">Calcola</button>
+                    <button id="giorni-calcola" onclick="calcolaGiorni();">Calcola</button>
                     <div id="risultato-container" class="mg-hide">
                         <div id="risultato-block-1" class="risultato">
                             <h1 class="mg-sofia" id="qmanca-giorni-risultato1"></h1>
@@ -362,7 +363,9 @@
             <div class="app-main-section">
                 <div class="app-main-section-block" id="qmanca-data">
                     <h1 class="mg-sofia">Che giorno sarà?</h1>
-                    <p>Inserisci il numero di giorni mancanti per calcolare una data futura.</p> <input type="number" id="giorni-input" min="0" max="1000000" step="10"> <button id="calcola-data" onclick="calcolaData();">Calcola</button>
+                    <p>Inserisci il numero di giorni mancanti per calcolare una data futura.</p>
+                    <input type="number" id="giorni-input" min="0" max="1000000" step="10">
+                    <button id="data-calcola" onclick="calcolaData();">Calcola</button>
                     <div id="qmanca-data-risultato-blocco" class="mg-hide">
                         <div class="risultato">
                             <h1 class="mg-sofia" id="qmanca-data-risultato"></h1>
@@ -371,6 +374,22 @@
                     </div>
                 </div>
             </div>
+
+            <div class="app-main-section">
+                <div class="app-main-section-block" id="qmanca-eta">
+                    <h1 class="mg-sofia">Quanti anni ha?</h1>
+                    <p>Inserisci la data di nascita per calcolare l'età.</p>
+                    <input type="date" id="qmanca-eta-input">
+                    <button id="eta-calcola" onclick="calcolaEta();">Calcola</button>
+                    <div id="qmanca-eta-risultato-blocco" class="mg-hide">
+                        <div class="risultato">
+                            <h1 class="mg-sofia" id="qmanca-eta-risultato"></h1>
+                        </div>
+                        <div><a href="javascript:location.reload();" title="inserisci nuova numero"><span class="material-symbols-outlined icon-button">refresh</span></a></div>
+                    </div>
+                </div>
+            </div>
+
 
         </div>
         <div id="app-menu">
@@ -470,12 +489,16 @@
         document.addEventListener("keydown", function (event) {
 
             // calcola giorni
-            if (event.key == "1" && event.ctrlKey) {
-                document.getElementById("calcola-giorni").click();
+            if (event.ctrlKey && event.key == "1") {
+                document.getElementById("giori-calcola").click();
             }
             // calcola data
-            if (event.key == "2" && event.ctrlKey) {
-                document.getElementById("calcola-data").click();
+            if (event.ctrlKey && event.key == "2") {
+                document.getElementById("data-calcola").click();
+            }
+            // calcola età
+            if (event.ctrlKey && event.key == "3") {
+                document.getElementById("eta-calcola").click();
             }
             // ricarica pagina
             if (event.key == "r") {
@@ -547,7 +570,11 @@
                 let giorniRimasti = Math.floor(((differenzaGiorniOppure % 365) % 30) % 7);
 
                 // risultato approssimato in anni, mesi, settimane, giorni
-                if (anni != 0) {
+                if (anni != 0 && mesi == 0 && settimane == 0) {
+                    document.getElementById("qmanca-giorni-risultato2").innerHTML = anni + " anni<br/>" + giorniRimasti + " giorni</br>";
+                } else if (anni != 0 && mesi == 0) {
+                    document.getElementById("qmanca-giorni-risultato2").innerHTML = anni + " anni<br/>" + settimane + " settimane</br>" + giorniRimasti + " giorni</br>";
+                } else if (anni != 0) {
                     document.getElementById("qmanca-giorni-risultato2").innerHTML = anni + " anni<br/>" + mesi + " mesi</br>" + settimane + " settimane</br>" + giorniRimasti + " giorni</br>";
                 } else if (mesi != 0 && settimane == 0) {
                     document.getElementById("qmanca-giorni-risultato2").innerHTML = mesi + " mesi</br>" + giorniRimasti + " giorni";
@@ -570,15 +597,15 @@
             let numeroGiorni = parseInt(giorniInput);
 
             // ottieni la data attuale
-            var dataAttuale = new Date();
+            const dataAttuale = new Date();
 
             // calcola la data futura
-            var dataFutura = new Date();
+            const dataFutura = new Date();
             dataFutura.setDate(dataAttuale.getDate() + numeroGiorni);
 
             // formatta la data
-            var formatoData = { year: 'numeric', month: 'long', day: 'numeric' };
-            var dataFuturaFormattata = dataFutura.toLocaleDateString('it-IT', formatoData);
+            let formatoData = { year: 'numeric', month: 'long', day: 'numeric' };
+            let dataFuturaFormattata = dataFutura.toLocaleDateString('it-IT', formatoData);
 
             // verifica l'input e mostra il risultato
             mostra(1, 'qmanca-data-risultato-blocco')
@@ -590,6 +617,42 @@
             } else {
                 document.getElementById('qmanca-data-risultato').textContent = dataFuturaFormattata;
             }
+        }
+
+        function calcolaEta() {
+
+            // oggi
+            const oggi = new Date();
+
+            // data di nascita
+            let dataNascita = document.getElementById('qmanca-eta-input').value;
+            dataNascita = new Date(dataNascita);
+
+            // differenza anni
+            let differenzaAnni = oggi.getFullYear() - dataNascita.getFullYear();
+
+            // differenza mesi e segno differenza date (positiva = futuro))
+            let differenzaMesi = oggi.getMonth() - dataNascita.getMonth();
+            let differenzaDate = Math.sign(oggi - dataNascita);
+
+            // blocco risultato
+            mostra(1, 'qmanca-eta-risultato-blocco')
+            animazione('qmanca-eta');
+
+            // controlli
+            if (isNaN(differenzaAnni) || differenzaDate < 0) {
+                document.getElementById('qmanca-eta-risultato').textContent = "Inserisci una data di nascita valida!";
+                return;
+            } else if (oggi.getMonth() < dataNascita.getMonth() || (oggi.getMonth() === dataNascita.getMonth() && oggi.getDate() < dataNascita.getDate())) {
+                differenzaAnni--;
+            }
+            if (differenzaAnni == 0 && differenzaMesi >= 0) {
+                document.getElementById('qmanca-eta-risultato').textContent = "0 🍼";
+                return;
+            }
+
+            // risultato
+            document.getElementById('qmanca-eta-risultato').textContent = differenzaAnni;
         }
 
     </script>
