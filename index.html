@@ -424,22 +424,24 @@
             };
         }
 
-        // aggiunge classe animazione .mg-tada
+        // aggiunge classe animazione .mg-tada e suono notifica
         function animazione(id) {
+
+            // suono notifica
+            var audio = new Audio('assets/audio/alert-pop.wav');
+            //var audio = new Audio('assets/audio/john-pop.wav');
+            audio.play();
+
+            // animazione e scroll blocco
             let elemento = document.getElementById(id);
             elemento.classList.add("mg-tada");
             elemento.scrollIntoView();
-
 
             // rimuove la classe .mg-tada al termine dell'animazione
             elemento.addEventListener("animationend", function () {
                 elemento.classList.remove("mg-tada");
             }, { once: true });
 
-            // suono notifica
-            var audio = new Audio('assets/audio/alert-pop.wav');
-            //var audio = new Audio('assets/audio/john-pop.wav');
-            audio.play();
         }
 
         // controllo se il tema è impostato
