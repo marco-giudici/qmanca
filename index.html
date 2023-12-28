@@ -87,6 +87,7 @@
 
         .tema2 {
             background-color: #EAF2D7;
+            background-image: url("assets/sfondi/icons_alberi.png");
         }
 
         .tema3 {
@@ -434,6 +435,10 @@
             elemento.addEventListener("animationend", function () {
                 elemento.classList.remove("mg-tada");
             }, { once: true });
+
+            // suono notifica
+            var audio = new Audio('assets/audio/long-pop.wav');
+            audio.play();
         }
 
         // controllo se il tema è impostato
@@ -590,6 +595,7 @@
         }
 
         function calcolaData() {
+
             // ottieni il numero di giorni inserito dall'utente
             let giorniInput = document.getElementById("giorni-input").value;
 
