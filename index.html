@@ -5,8 +5,8 @@
     <title>Quanto Manca?</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta title="Quanto manca? Qmanca calcola quanti giorni mancano">
-    <meta name="description" content="Quanti giorni mancano al Natale? Quanti giorni mancano al compleanno di mamma? Qmanca.app calcola quanti giorni mancano alla data selezionata.">
+    <meta title="Quanto manca? Che giorno sarà? Quanti anni ha? Qmanca calcola scadenze, date ed età in un istante!">
+    <meta name="description" content="Qmanca è un'applicazione semplice ma molto utile che ti permette di calcolare quanti giorni mancano ad una certa data oppure che data sarà tra n giorni. Qmanca può anche calcolare quanti anni ha una persona inserendo la data o anno di nascita.">
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -437,7 +437,8 @@
             }, { once: true });
 
             // suono notifica
-            var audio = new Audio('assets/audio/long-pop.wav');
+            var audio = new Audio('assets/audio/alert-pop.wav');
+            //var audio = new Audio('assets/audio/john-pop.wav');
             audio.play();
         }
 
@@ -653,12 +654,12 @@
                 differenzaAnni--;
             }
             if (differenzaAnni == 0 && differenzaMesi >= 0) {
-                document.getElementById('qmanca-eta-risultato').textContent = "0 🍼";
+                document.getElementById('qmanca-eta-risultato').textContent = "0 anni 🍼";
                 return;
             }
 
             // risultato
-            document.getElementById('qmanca-eta-risultato').textContent = differenzaAnni;
+            document.getElementById('qmanca-eta-risultato').textContent = differenzaAnni + " anni";
         }
 
     </script>
