@@ -431,8 +431,10 @@
         function animazione(id) {
 
             // suono notifica
-            var audio = new Audio('assets/audio/alert-pop.wav');
+            //var audio = new Audio('assets/audio/alert-pop.wav');
             //var audio = new Audio('assets/audio/john-pop.wav');
+            var audio = new Audio('assets/audio/long-pop.wav');
+
             audio.play();
 
             // animazione e scroll blocco
@@ -591,8 +593,7 @@
                     document.getElementById("qmanca-giorni-risultato2").innerHTML = mesi + " mesi</br>" + giorniRimasti + " giorni";
                 } else if (mesi != 0) {
                     document.getElementById("qmanca-giorni-risultato2").innerHTML = mesi + " mesi</br>" + settimane + " settimane</br>" + giorniRimasti + " giorni";
-                }
-                else if (settimane != 0 && giorniRimasti == 0) {
+                } else if (settimane != 0 && giorniRimasti == 0) {
                     document.getElementById("qmanca-giorni-risultato2").innerHTML = settimane + " settimane<br/>";
                 } else if (settimane != 0) {
                     document.getElementById("qmanca-giorni-risultato2").innerHTML = settimane + " settimane<br/>" + giorniRimasti + " giorni";
