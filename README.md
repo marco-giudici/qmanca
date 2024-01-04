@@ -1,2 +1,1 @@
-# qmanca
-Quanti giorni mancano al Natale? Quanti giorni mancano al compleanno di mamma? Qmanca.app calcola i giorni trascorsi o mancanti alla data selezionata.
+Qmanca è un'applicazione semplice ma molto utile che ti permette di calcolare quanti giorni mancano ad una certa data oppure che data sarà tra n giorni. Qmanca può anche calcolare l'età di una persona inserendo la data o anno di nascita.
